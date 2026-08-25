@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#090D16">
+  <meta name="theme-color" content="#C3161A">
   <title>Sustentación Trabajo de Grado | Víctor Manuel Alzate Morales - Univalle</title>
 
   <!-- Icono de la pestaña -->
-  <link rel="icon" type="image/png" href="univalle.png">
-  <link rel="apple-touch-icon" href="univalle.png">
+  <link rel="icon" type="image/png" href="univalle_logo.png">
+  <link rel="apple-touch-icon" href="univalle_logo.png">
 
   <!-- Metadatos para buscadores y para compartir el enlace -->
   <meta name="description" content="Sistema analítico para el monitoreo y optimización de las estrategias de crecimiento de clientes del área de Growth en Dataico. Trabajo de grado, Universidad del Valle.">
@@ -32,42 +32,43 @@
   <meta name="twitter:title" content="Sustentación de Trabajo de Grado | Víctor Manuel Alzate Morales">
   <meta name="twitter:description" content="Sistema analítico para el monitoreo y optimización de estrategias de crecimiento de clientes en Dataico. Universidad del Valle, Sede Tulúa.">
   <meta name="twitter:image" content="https://incognyto10.github.io/Presentacion-Trabajo-de-Grado/univalle.png">
-  
+
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
+
   <style>
     /* ==========================================================================
        DESIGN SYSTEM & UNIVALLE PALETTE
        ========================================================================== */
     :root {
-      --univalle-red: #C8102E;
-      --univalle-red-dark: #8A0B1E;
-      --univalle-red-light: #EF4444;
-      --univalle-red-glow: rgba(200, 16, 46, 0.35);
-      --gold-accent: #D4AF37;
-      --gold-glow: rgba(212, 175, 55, 0.3);
-      
-      --bg-dark: #090D16;
-      --bg-card: rgba(15, 23, 42, 0.88);
-      --bg-card-hover: rgba(30, 41, 59, 0.95);
-      
-      --text-main: #F8FAFC;
-      --text-muted: #94A3B8;
-      --text-dim: #64748B;
-      
-      --border-color: rgba(255, 255, 255, 0.12);
-      --border-highlight: rgba(200, 16, 46, 0.5);
-      
+      /* Rojo institucional muestreado del escudo oficial (univalle_logo.png) */
+      --univalle-red: #C3161A;
+      --univalle-red-dark: #7A0E10;
+      --univalle-red-light: #E4585C;
+      --univalle-red-glow: rgba(195, 22, 26, 0.35);
+      --gold-accent: #7A0E10;
+      --gold-glow: rgba(122, 14, 16, 0.3);
+
+      --bg-dark: #F2F1F0;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #FDF4F4;
+
+      --text-main: #1A1A1E;
+      --text-muted: #52525B;
+      --text-dim: #6B7280;
+
+      --border-color: rgba(0, 0, 0, 0.10);
+      --border-highlight: rgba(195, 22, 26, 0.5);
+
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
-      
-      --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-      --shadow-glow: 0 0 30px rgba(200, 16, 46, 0.25);
-      
+
+      --shadow-lg: 0 16px 34px -14px rgba(20, 15, 15, 0.20);
+      --shadow-glow: 0 0 30px rgba(195, 22, 26, 0.25);
+
       --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -109,7 +110,7 @@
       pointer-events: none;
       z-index: 999999;
       transform: translate(-50%, -50%);
-      box-shadow: 
+      box-shadow:
         0 0 8px #FF0033,
         0 0 16px #FF0033,
         0 0 28px #FF0000,
@@ -148,7 +149,7 @@
       left: -10%;
       width: 50vw;
       height: 50vh;
-      background: radial-gradient(circle, var(--univalle-red-glow) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(195, 22, 26, 0.10) 0%, transparent 70%);
       z-index: 0;
       pointer-events: none;
     }
@@ -158,7 +159,7 @@
       right: -10%;
       width: 50vw;
       height: 50vh;
-      background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(122, 14, 16, 0.08) 0%, transparent 70%);
       z-index: 0;
       pointer-events: none;
     }
@@ -182,7 +183,7 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-color);
-      background: rgba(9, 13, 22, 0.92);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       z-index: 10;
       flex-shrink: 0;
@@ -197,36 +198,24 @@
     .univalle-badge {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 5px 12px;
-      background: linear-gradient(135deg, var(--univalle-red-dark), var(--univalle-red));
-      border-radius: var(--radius-sm);
-      box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
     }
 
     .univalle-logo-img {
-      height: 24px;
-      width: auto;
+      height: 36px;
+      width: 36px;
       object-fit: contain;
+      border-radius: 7px;
+      box-shadow: 0 2px 8px rgba(20, 15, 15, 0.22);
     }
 
     .univalle-svg-fallback {
-      width: 22px;
-      height: 22px;
-      fill: #FFFFFF;
-    }
-
-    .univalle-text {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      color: #FFFFFF;
-      text-transform: uppercase;
+      width: 34px;
+      height: 34px;
+      fill: var(--univalle-red);
     }
 
     .project-header-title {
-      font-size: 0.9rem;
+      font-size: 0.98rem;
       font-weight: 500;
       color: var(--text-muted);
       border-left: 2px solid var(--border-color);
@@ -240,12 +229,12 @@
     }
 
     .icon-btn {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.035);
       border: 1px solid var(--border-color);
       color: var(--text-main);
       padding: 7px 13px;
       border-radius: var(--radius-sm);
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 500;
       cursor: pointer;
       display: flex;
@@ -255,13 +244,14 @@
     }
 
     .icon-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.07);
+      border-color: rgba(0, 0, 0, 0.18);
     }
 
     .icon-btn.active {
       background: var(--univalle-red);
       border-color: var(--univalle-red-light);
+      color: #FFFFFF;
       box-shadow: 0 0 12px var(--univalle-red-glow);
     }
 
@@ -285,7 +275,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 32px 44px;
+      padding: 20px 40px;
       box-shadow: var(--shadow-lg);
       backdrop-filter: blur(16px);
       display: flex;
@@ -309,29 +299,31 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.75rem;
+      font-size: clamp(0.75rem, 1vh + 0.5rem, 0.85rem);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: #FFFFFF;
-      margin-bottom: 6px;
+      color: var(--univalle-red);
+      margin-bottom: 2px;
+      flex-shrink: 0;
     }
 
     .slide-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.7rem;
+      font-size: clamp(1.35rem, 2.2vh + 0.75rem, 2.05rem);
       font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
       border-bottom: 2px solid var(--univalle-red);
-      line-height: 1.3;
+      line-height: 1.25;
+      flex-shrink: 0;
     }
 
     .slide-body {
       flex: 1;
       display: flex;
-      gap: 28px;
+      gap: 22px;
       align-items: stretch;
       min-height: 0;
     }
@@ -340,7 +332,9 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      justify-content: flex-start;
+      margin: auto 0;
+      gap: 12px;
       min-height: 0;
     }
 
@@ -350,32 +344,44 @@
 
     /* CARDS & METRIC BADGES */
     .info-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(0, 0, 0, 0.025);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 16px 20px;
+      padding: 11px 18px;
       transition: var(--transition-fast);
     }
+
+    /* Grillas 2x2 con 4 tarjetas: menos aire para que las 2 filas quepan siempre */
+    .dense-grid .info-card {
+      padding: 8px 16px;
+    }
+    .dense-grid .info-card-title {
+      margin-bottom: 2px;
+    }
+    .dense-grid .info-card p {
+      line-height: 1.22;
+    }
+
     .info-card:hover {
       border-color: var(--border-highlight);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.045);
     }
 
     .info-card-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.02rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--gold-accent);
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .info-card p, .info-card li {
-      font-size: 0.9rem;
+      font-size: 1.02rem;
       color: var(--text-muted);
-      line-height: 1.55;
+      line-height: 1.35;
     }
 
     .info-card ul {
@@ -393,27 +399,27 @@
     }
 
     .metric-box {
-      background: linear-gradient(145deg, rgba(200, 16, 46, 0.15), rgba(15, 23, 42, 0.6));
+      background: linear-gradient(145deg, rgba(195, 22, 26, 0.09), rgba(255, 255, 255, 0.9));
       border: 1px solid var(--border-highlight);
       border-radius: var(--radius-md);
       padding: 16px;
       text-align: center;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 16px rgba(20, 15, 15, 0.10);
     }
 
     .metric-value {
       font-family: 'Outfit', sans-serif;
-      font-size: 2.1rem;
+      font-size: 2.4rem;
       font-weight: 800;
-      color: #FFFFFF;
+      color: var(--text-main);
       margin-bottom: 2px;
-      background: linear-gradient(90deg, #FFFFFF, var(--gold-accent));
+      background: linear-gradient(90deg, var(--univalle-red-dark), var(--univalle-red));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .metric-label {
-      font-size: 0.8rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -424,12 +430,12 @@
     .image-container {
       width: 100%;
       flex: 1;
-      min-height: 250px;
+      min-height: 150px;
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid var(--border-color);
       box-shadow: var(--shadow-lg);
-      background: #050810;
+      background: #EDEEF0;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -449,9 +455,9 @@
     }
 
     .image-caption {
-      background: rgba(9, 13, 22, 0.9);
+      background: rgba(243, 244, 246, 0.95);
       padding: 6px 12px;
-      font-size: 0.78rem;
+      font-size: 0.86rem;
       color: var(--text-muted);
       text-align: center;
       backdrop-filter: blur(8px);
@@ -463,13 +469,13 @@
     .slide-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       margin-top: 6px;
     }
 
     .slide-table th {
-      background: rgba(200, 16, 46, 0.2);
-      color: #FFFFFF;
+      background: rgba(195, 22, 26, 0.12);
+      color: var(--univalle-red-dark);
       font-family: 'Outfit', sans-serif;
       font-weight: 700;
       text-align: left;
@@ -484,7 +490,7 @@
     }
 
     .slide-table tr:hover td {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(0, 0, 0, 0.03);
       color: var(--text-main);
     }
 
@@ -496,7 +502,7 @@
       align-items: center;
       justify-content: space-between;
       border-top: 1px solid var(--border-color);
-      background: rgba(9, 13, 22, 0.94);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       z-index: 10;
       position: relative;
@@ -509,7 +515,7 @@
       left: 0;
       width: 100%;
       height: 4px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.06);
     }
 
     #progress-bar {
@@ -522,7 +528,7 @@
 
     .slide-counter {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-main);
       display: flex;
@@ -537,24 +543,24 @@
     }
 
     .nav-btn {
-      background: linear-gradient(135deg, rgba(200, 16, 46, 0.85), var(--univalle-red-dark));
+      background: linear-gradient(135deg, rgba(195, 22, 26, 0.85), var(--univalle-red-dark));
       border: 1px solid var(--univalle-red-light);
       color: #FFFFFF;
       padding: 8px 16px;
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      font-size: 0.92rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
       transition: var(--transition-fast);
-      box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+      box-shadow: 0 4px 12px rgba(195, 22, 26, 0.3);
     }
 
     .nav-btn:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(200, 16, 46, 0.5);
+      box-shadow: 0 6px 18px rgba(195, 22, 26, 0.5);
     }
 
     .nav-btn:disabled {
@@ -570,11 +576,11 @@
       right: 28px;
       width: 400px;
       max-height: 360px;
-      background: rgba(15, 23, 42, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       border: 1px solid var(--gold-accent);
       border-radius: var(--radius-md);
       padding: 20px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      box-shadow: 0 20px 50px rgba(20, 15, 15, 0.20);
       backdrop-filter: blur(20px);
       z-index: 100;
       transform: translateY(120%);
@@ -599,7 +605,7 @@
 
     .notes-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--gold-accent);
       display: flex;
@@ -608,7 +614,7 @@
     }
 
     .notes-content {
-      font-size: 0.88rem;
+      font-size: 0.98rem;
       line-height: 1.6;
       color: var(--text-main);
     }
@@ -617,7 +623,7 @@
     #overview-modal {
       position: fixed;
       inset: 0;
-      background: rgba(9, 13, 22, 0.95);
+      background: rgba(250, 250, 251, 0.97);
       backdrop-filter: blur(20px);
       z-index: 200;
       padding: 36px;
@@ -664,16 +670,16 @@
     .overview-card:hover {
       border-color: var(--univalle-red);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(200, 16, 46, 0.3);
+      box-shadow: 0 8px 20px rgba(195, 22, 26, 0.3);
     }
 
     .overview-card.active-card {
       border-color: var(--gold-accent);
-      background: rgba(212, 175, 55, 0.1);
+      background: rgba(122, 14, 16, 0.1);
     }
 
     .overview-card-num {
-      font-size: 0.72rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--gold-accent);
       text-transform: uppercase;
@@ -681,9 +687,9 @@
 
     .overview-card-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      color: #FFFFFF;
+      color: var(--text-main);
       line-height: 1.3;
     }
 
@@ -700,10 +706,10 @@
       top: 8px;
       right: 8px;
       background: rgba(9, 13, 22, 0.75);
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.78rem;
       padding: 3px 7px;
       display: flex;
       align-items: center;
@@ -746,7 +752,7 @@
       align-items: center;
       justify-content: center;
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
     #lightbox-img {
       max-width: 100%;
@@ -777,11 +783,11 @@
     }
     .lb-btn {
       background: rgba(15, 23, 42, 0.9);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
       border-radius: var(--radius-sm);
       padding: 7px 12px;
-      font-size: 0.82rem;
+      font-size: 0.9rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -791,18 +797,18 @@
     }
     .lb-btn:hover {
       background: rgba(255, 255, 255, 0.12);
-      border-color: var(--univalle-red);
+      border-color: var(--univalle-red-light);
     }
     #lb-zoom-level {
       font-family: 'Outfit', sans-serif;
       font-weight: 700;
-      font-size: 0.85rem;
-      color: var(--gold-accent);
+      font-size: 0.92rem;
+      color: var(--univalle-red-light);
       min-width: 52px;
       text-align: center;
       padding: 7px 10px;
       background: rgba(15, 23, 42, 0.9);
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: var(--radius-sm);
       backdrop-filter: blur(8px);
     }
@@ -814,10 +820,10 @@
       left: 50%;
       transform: translateX(-50%);
       background: rgba(9, 13, 22, 0.88);
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
       padding: 7px 18px;
       backdrop-filter: blur(8px);
       z-index: 10001;
@@ -858,22 +864,22 @@
     @keyframes glowPulseRed {
       0%, 100% {
         border-color: var(--border-highlight);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 rgba(200, 16, 46, 0);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 rgba(195, 22, 26, 0);
       }
       50% {
         border-color: var(--univalle-red-light);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 26px 2px rgba(200, 16, 46, 0.55);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 26px 2px rgba(195, 22, 26, 0.55);
       }
     }
 
     @keyframes glowPulseGold {
       0%, 100% {
         border-color: var(--border-color);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 rgba(212, 175, 55, 0);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 rgba(122, 14, 16, 0);
       }
       50% {
         border-color: var(--gold-accent);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 24px 2px rgba(212, 175, 55, 0.5);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 24px 2px rgba(122, 14, 16, 0.5);
       }
     }
 
@@ -939,7 +945,7 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(100deg, transparent 34%, rgba(255, 255, 255, 0.14) 50%, transparent 66%);
+      background: linear-gradient(100deg, transparent 34%, rgba(195, 22, 26, 0.10) 50%, transparent 66%);
       background-size: 280% 100%;
       background-position: 190% 0;
       background-repeat: no-repeat;
@@ -958,7 +964,7 @@
     }
     .anim-lift:hover {
       transform: translateY(-6px) scale(1.015);
-      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.7), 0 0 18px rgba(200, 16, 46, 0.3);
+      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.7), 0 0 18px rgba(195, 22, 26, 0.3);
       border-color: var(--univalle-red-light);
     }
 
@@ -1024,8 +1030,8 @@
       background: rgba(15, 23, 42, 0.94);
       border: 1px solid var(--gold-accent);
       border-radius: 99px;
-      color: var(--text-main);
-      font-size: 0.78rem;
+      color: #FFFFFF;
+      font-size: 0.85rem;
       padding: 8px 16px;
       z-index: 500;
       pointer-events: none;
@@ -1048,6 +1054,54 @@
     }
 
     /* ---------------------------------------------------------
+       VENTANAS DE BAJA ALTURA (ej. Modo Ventana o pantallas cortas)
+       --------------------------------------------------------- */
+    @media (max-height: 740px) {
+      #slide-viewport { padding: 12px 18px; }
+      .slide {
+        width: calc(100% - 36px);
+        height: calc(100% - 24px);
+        padding: 14px 24px;
+      }
+      .slide-title {
+        font-size: 1.45rem;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+      }
+      .slide-tag { font-size: 0.75rem; margin-bottom: 2px; }
+      .slide-body { gap: 14px; }
+      .slide-col { gap: 8px; }
+      .info-card { padding: 8px 14px; }
+      .info-card-title { font-size: 1.02rem; margin-bottom: 3px; }
+      .info-card p, .info-card li { font-size: 0.92rem; line-height: 1.3; }
+      .metric-box { padding: 14px !important; }
+      .metric-value { font-size: 1.75rem; }
+      .metric-label { font-size: 0.78rem; }
+      .image-container { min-height: 120px; }
+      .slide-table th, .slide-table td { padding: 6px 10px; font-size: 0.88rem; }
+    }
+
+    @media (max-height: 600px) {
+      #slide-viewport { padding: 8px 12px; }
+      .slide {
+        width: calc(100% - 24px);
+        height: calc(100% - 16px);
+        padding: 10px 18px;
+      }
+      .slide-title {
+        font-size: 1.25rem;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+      }
+      .info-card { padding: 6px 10px; }
+      .info-card-title { font-size: 0.96rem; margin-bottom: 2px; }
+      .info-card p, .info-card li { font-size: 0.86rem; line-height: 1.22; }
+      .metric-box { padding: 8px 12px !important; }
+      .metric-value { font-size: 1.4rem; }
+      .image-container { min-height: 100px; }
+    }
+
+    /* ---------------------------------------------------------
        LAPTOPS PEQUENAS / TABLETS HORIZONTALES  (<= 1200px)
        --------------------------------------------------------- */
     @media (max-width: 1200px) {
@@ -1057,10 +1111,10 @@
         height: calc(100% - 32px);
         padding: 24px 28px;
       }
-      .slide-title { font-size: 1.45rem; margin-bottom: 16px; }
+      .slide-title { font-size: 1.65rem; margin-bottom: 16px; }
       .slide-body { gap: 20px; }
       .slide-col { gap: 12px; }
-      .metric-value { font-size: 1.8rem; }
+      .metric-value { font-size: 2rem; }
       .project-header-title {
         font-size: 0.82rem;
         max-width: 30vw;
@@ -1068,7 +1122,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      .icon-btn { padding: 7px 10px; font-size: 0.78rem; }
+      .icon-btn { padding: 7px 10px; font-size: 0.85rem; }
       .icon-btn kbd { display: none; }
     }
 
@@ -1143,10 +1197,10 @@
         gap: 12px;
       }
       .metric-box { padding: 14px !important; }
-      .metric-value { font-size: 1.7rem; }
+      .metric-value { font-size: 1.9rem; }
 
       /* Tablas con scroll horizontal propio */
-      .slide-table { font-size: 0.8rem; min-width: 520px; }
+      .slide-table { font-size: 0.88rem; min-width: 520px; }
       .slide-table th, .slide-table td { padding: 8px 10px; }
 
       /* Notas del orador como hoja inferior */
@@ -1161,7 +1215,7 @@
 
       #overview-modal { padding: 16px 14px calc(16px + env(safe-area-inset-bottom, 0px)); }
       .overview-header { margin-bottom: 14px; }
-      .overview-header h2 { font-size: 1.1rem !important; }
+      .overview-header h2 { font-size: 1.2rem !important; }
       .overview-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 10px;
@@ -1175,12 +1229,10 @@
        --------------------------------------------------------- */
     @media (max-width: 640px) {
       header { min-height: 50px; padding: 7px 10px; }
-      .univalle-badge { padding: 4px 9px; gap: 7px; }
-      .univalle-logo-img { height: 19px; }
-      .univalle-text { font-size: 0.7rem; letter-spacing: 0.3px; }
+      .univalle-logo-img { height: 30px; width: 30px; }
       /* El puntero laser depende del mouse: no aplica en movil */
       #btn-laser { display: none; }
-      .icon-btn { padding: 8px 10px; min-width: 40px; font-size: 0.95rem; }
+      .icon-btn { padding: 8px 10px; min-width: 40px; font-size: 1rem; }
 
       #slide-viewport { padding: 8px 8px; }
       .slide {
@@ -1189,7 +1241,7 @@
         padding: 14px 14px 20px;
       }
 
-      .slide-tag { font-size: 0.62rem; letter-spacing: 1px; margin-bottom: 4px; }
+      .slide-tag { font-size: 0.72rem; letter-spacing: 1px; margin-bottom: 4px; }
       .slide-title {
         font-size: 1.12rem;
         margin-bottom: 12px;
@@ -1198,28 +1250,28 @@
       }
 
       .info-card { padding: 12px 13px; }
-      .info-card-title { font-size: 0.9rem; margin-bottom: 6px; }
-      .info-card p, .info-card li { font-size: 0.82rem; line-height: 1.5; }
+      .info-card-title { font-size: 1.02rem; margin-bottom: 6px; }
+      .info-card p, .info-card li { font-size: 0.92rem; line-height: 1.5; }
       .info-card ul { padding-left: 16px; }
 
       .metric-grid { grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)) !important; gap: 10px; }
-      .metric-value { font-size: 1.45rem; }
-      .metric-label { font-size: 0.68rem; }
+      .metric-value { font-size: 1.62rem; }
+      .metric-label { font-size: 0.76rem; }
 
       .image-container img { max-height: 42vh; }
-      .image-caption { font-size: 0.71rem; padding: 5px 9px; }
-      .image-zoom-hint { font-size: 0.64rem; padding: 2px 6px; }
+      .image-caption { font-size: 0.8rem; padding: 5px 9px; }
+      .image-zoom-hint { font-size: 0.72rem; padding: 2px 6px; }
 
-      .slide-table { font-size: 0.76rem; min-width: 460px; }
+      .slide-table { font-size: 0.86rem; min-width: 460px; }
 
       footer {
         height: auto;
         min-height: 56px;
         padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
       }
-      .slide-counter { font-size: 0.85rem; }
+      .slide-counter { font-size: 0.92rem; }
       .nav-controls { gap: 8px; }
-      .nav-btn { padding: 10px 14px; font-size: 0.82rem; }
+      .nav-btn { padding: 10px 14px; font-size: 0.9rem; }
 
       /* Lightbox adaptado a pantalla vertical */
       #lightbox-img-wrap {
@@ -1237,8 +1289,8 @@
         flex-wrap: wrap;
         gap: 6px;
       }
-      .lb-btn { padding: 9px 12px; font-size: 0.8rem; }
-      #lb-zoom-level { min-width: 48px; padding: 9px 8px; font-size: 0.8rem; }
+      .lb-btn { padding: 9px 12px; font-size: 0.88rem; }
+      #lb-zoom-level { min-width: 48px; padding: 9px 8px; font-size: 0.88rem; }
       #lightbox-caption {
         top: calc(10px + env(safe-area-inset-top, 0px));
         bottom: auto;
@@ -1254,12 +1306,11 @@
        MOVILES ESTRECHOS  (<= 400px)
        --------------------------------------------------------- */
     @media (max-width: 400px) {
-      .univalle-text { display: none; }
       .icon-btn { padding: 8px 9px; min-width: 36px; }
       .metric-grid { grid-template-columns: 1fr !important; }
-      .slide-title { font-size: 1.02rem; }
+      .slide-title { font-size: 1.16rem; }
       .nav-btn .btn-label { display: none; }
-      .nav-btn { padding: 10px 16px; font-size: 1rem; }
+      .nav-btn { padding: 10px 16px; font-size: 1.08rem; }
       .overview-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); }
     }
 
@@ -1275,7 +1326,7 @@
         height: calc(100% - 12px);
         padding: 12px 16px;
       }
-      .slide-title { font-size: 0.98rem; margin-bottom: 8px; padding-bottom: 6px; }
+      .slide-title { font-size: 1.1rem; margin-bottom: 8px; padding-bottom: 6px; }
       .slide-tag { margin-bottom: 2px; }
       .slide-body {
         flex-direction: row !important;
@@ -1284,7 +1335,7 @@
       .slide-col, .slide-col-wide { flex: 1 1 0 !important; }
       .image-container { flex: 1 1 auto !important; min-height: 120px; }
       .image-container img { max-height: 100%; height: 100%; }
-      .metric-value { font-size: 1.3rem; }
+      .metric-value { font-size: 1.45rem; }
       #lightbox-img-wrap { height: 78vh; }
       #touch-hint { bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
     }
@@ -1311,17 +1362,16 @@
 
   <!-- PRESENTATION APP -->
   <div id="presentation-app">
-    
+
     <!-- HEADER -->
     <header>
       <div class="brand-group">
         <div class="univalle-badge">
           <!-- Univalle Logo Image / SVG Fallback -->
-          <img src="univalle.png" alt="Universidad del Valle" class="univalle-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <img src="univalle_logo.png" alt="Universidad del Valle" class="univalle-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
           <svg class="univalle-svg-fallback" style="display:none;" viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
           </svg>
-          <span class="univalle-text">UNIVALLE</span>
         </div>
         <div class="project-header-title">
           Trabajo de Grado | Víctor Manuel Alzate Morales
@@ -1351,12 +1401,12 @@
       <section class="slide active" data-slide="1" data-notes="Buenos días a los miembros del jurado y asistentes. Hoy presento mi trabajo de grado titulado 'Implementación de un sistema analítico para el monitoreo y optimización de estrategias de crecimiento de clientes en el área de Growth en Dataico'. Este proyecto responde a la necesidad de transformar procesos analíticos manuales en un ecosistema automatizado y basado en datos para una empresa SaaS real.">
         <div class="slide-tag">Universidad del Valle • Facultad de Ingeniería</div>
         <h1 class="slide-title">Implementación de un sistema analítico para el monitoreo y optimización de estrategias de crecimiento de clientes en el área de Growth en Dataico</h1>
-        
+
         <div class="slide-body" style="align-items: center;">
           <div class="slide-col" style="flex: 1.2;">
-            <div class="info-card" style="border-left: 4px solid var(--univalle-red); background: rgba(200, 16, 46, 0.08);">
+            <div class="info-card" style="border-left: 4px solid var(--univalle-red); background: rgba(195, 22, 26, 0.08);">
               <div class="info-card-title">🎓 Sustentación de Trabajo de Grado</div>
-              <p style="font-size: 1rem; color: #FFFFFF; font-weight: 600; margin-bottom: 6px;">
+              <p style="font-size: 1.1rem; color: var(--text-main); font-weight: 600; margin-bottom: 6px;">
                 Modalidad Pasantía Académica
               </p>
               <p>Escuela de Ingeniería de Sistemas y Computación • Programa de Ingeniería de Sistemas</p>
@@ -1366,13 +1416,13 @@
             <div class="metric-grid">
               <div class="info-card anim-flip anim-lift">
                 <div class="info-card-title">👨‍💻 Autor</div>
-                <p style="color: #FFF; font-weight: 700;">Víctor Manuel Alzate Morales</p>
-                <p style="font-size: 0.82rem;">Código: 2313022</p>
+                <p style="color: var(--text-main); font-weight: 700;">Víctor Manuel Alzate Morales</p>
+                <p style="font-size: 0.9rem;">Código: 2313022</p>
               </div>
               <div class="info-card anim-flip anim-lift">
                 <div class="info-card-title">👨‍🏫 Director de Tesis</div>
-                <p style="color: #FFF; font-weight: 700;">Mauricio López Benítez</p>
-                <p style="font-size: 0.82rem;">Profesor Univalle</p>
+                <p style="color: var(--text-main); font-weight: 700;">Mauricio López Benítez</p>
+                <p style="font-size: 0.9rem;">Profesor Univalle</p>
               </div>
             </div>
           </div>
@@ -1382,7 +1432,7 @@
               <div style="font-size: 3rem; margin-bottom: 8px;"><span class="i-sway">🚀</span></div>
               <div class="metric-value">Dataico</div>
               <div class="metric-label">Empresa SaaS de Facturación Electrónica</div>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 10px;">
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
                 Ecosistema de inteligencia de negocios y automatización analítica sobre el área de Growth.
               </p>
             </div>
@@ -1392,21 +1442,21 @@
 
       <!-- SLIDE 2: CONTEXTO Y PROBLEMA -->
       <section class="slide" data-slide="2" data-notes="En el área de Growth de Dataico, los datos de los usuarios se encontraban dispersos en múltiples plataformas transaccionales y de marketing. Esto obligaba a los analistas a dedicar horas cada semana consolidando informes manuales en Excel, lo que generaba riesgo de errores humanos, discrepancias en los números de recaudo e imposibilitaba realizar análisis predictivos o cualitativos sobre el comportamiento de los clientes.">
-        <div class="slide-tag">Capítulo 1 • Planteamiento del Problema</div>
+        <div class="slide-tag">Planteamiento del Problema</div>
         <h2 class="slide-title">Contexto Operativo y Problemática del Negocio</h2>
 
         <div class="slide-body">
           <div class="slide-col">
-            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid #EF4444;">
-              <div class="info-card-title" style="color: #EF4444;">❌ 1. Dispersión de Fuentes de Datos</div>
+            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid var(--univalle-red);">
+              <div class="info-card-title" style="color: var(--univalle-red);">❌ 1. Dispersión de Fuentes de Datos</div>
               <p>Información aislada en PostgreSQL (base transaccional), HubSpot (CRM y soporte) y Google Analytics. Falta de una fuente única de verdad.</p>
             </div>
-            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid #F59E0B;">
-              <div class="info-card-title" style="color: #F59E0B;">⚠️ 2. Reportería Manual Repetitiva</div>
+            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid var(--univalle-red-dark);">
+              <div class="info-card-title" style="color: var(--univalle-red-dark);">⚠️ 2. Reportería Manual Repetitiva</div>
               <p>Varias horas semanales dedicadas a consolidar hojas de cálculo en Excel. Riesgo constante de error humano y discrepancias en métricas financieras.</p>
             </div>
-            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid #3B82F6;">
-              <div class="info-card-title" style="color: #60A5FA;">📉 3. Toma de Decisiones Reactiva</div>
+            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid #3F3F46;">
+              <div class="info-card-title" style="color: #3F3F46;">📉 3. Toma de Decisiones Reactiva</div>
               <p>Volatilidad no registrada en el recaudo diario (MRR) y falta de análisis cualitativo estructurado sobre las causas reales del abandono de clientes (Churn).</p>
             </div>
           </div>
@@ -1415,9 +1465,9 @@
             <div class="metric-box" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
               <div class="metric-value" style="color: var(--univalle-red-light);">+5 Horas</div>
               <div class="metric-label" style="margin-bottom: 16px;">Perdidas semanalmente en tabulación manual</div>
-              
+
               <div style="border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 14px;"></div>
-              
+
               <div class="metric-value" style="color: var(--gold-accent);">0%</div>
               <div class="metric-label">Trazabilidad cualitativa previa sobre tickets de soporte</div>
             </div>
@@ -1427,50 +1477,56 @@
 
       <!-- SLIDE 3: OBJETIVOS Y TRAZABILIDAD -->
       <section class="slide" data-slide="3" data-notes="Para solucionar esta problemática se planteó como objetivo general implementar un sistema analítico modular. Este objetivo se dividió en 5 etapas secuenciales: desde el diagnóstico de necesidades y el modelado dimensional de la base de datos, hasta el desarrollo de pipelines ETL, paneles de Inteligencia de Negocios y la posterior evaluación de efectividad con el equipo directivo.">
-        <div class="slide-tag">Capítulo 1 • Formulación del Proyecto</div>
-        <h2 class="slide-title">Objetivos Específicos y Resultados Esperados</h2>
+        <div class="slide-tag">Formulación del Proyecto</div>
+        <h2 class="slide-title">Objetivos</h2>
 
-        <div class="slide-body" style="flex-direction: column;">
-          <p style="color: var(--text-muted); margin-bottom: 10px;">
-            <strong>Objetivo General:</strong> Implementar un sistema analítico modular con el propósito de estandarizar y optimizar el monitoreo de las estrategias de adquisición, activación y retención de clientes en el área de Growth.
-          </p>
+        <div class="slide-body" style="flex-direction: column; gap: 14px;">
+          <!-- Objetivo General -->
+          <div class="info-card anim-flip" style="border-left: 4px solid var(--univalle-red); flex: 0 0 auto; background: rgba(195, 22, 26, 0.05); padding: 14px 20px;">
+            <div class="info-card-title">🎯 Objetivo General</div>
+            <p>Implementar un sistema analítico modular con el propósito de estandarizar y optimizar el monitoreo de las estrategias de adquisición, activación y retención de clientes en el área de Growth.</p>
+          </div>
 
-          <table class="slide-table">
-            <thead>
-              <tr>
-                <th style="width: 45%;">Objetivo Específico</th>
-                <th style="width: 55%;">Resultado Esperado Proyectado (Entregable)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>1. Diagnóstico:</strong> Identificar deficiencias y requerimientos analíticos del área.</td>
-                <td>Documento de diagnóstico y catálogo formalizado de métricas de Growth.</td>
-              </tr>
-              <tr>
-                <td><strong>2. Modelado:</strong> Determinar indicadores y fuentes de datos clave.</td>
-                <td>Modelo dimensional de datos en estrella (Star Schema) en PostgreSQL.</td>
-              </tr>
-              <tr>
-                <td><strong>3. Integración ETL:</strong> Desarrollar modelo de procesamiento automatizado.</td>
-                <td>Pipelines ETL en Python (captura MRR) y flujo NLP/LLM para análisis de Churn.</td>
-              </tr>
-              <tr>
-                <td><strong>4. Visualización BI:</strong> Diseñar modelo de visualización interactiva.</td>
-                <td>Suite de dashboards en Metabase y Looker Studio con vistas de presupuesto y caja.</td>
-              </tr>
-              <tr>
-                <td><strong>5. Evaluación:</strong> Evaluar efectividad e impacto en la toma de decisiones.</td>
-                <td>Metodología QA (0% error) e informe de impacto operativo, estratégico y financiero.</td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- Divisor Objetivos Específicos -->
+          <div style="display: flex; align-items: center; gap: 10px; flex: 0 0 auto;">
+            <div style="flex: 1; height: 1px; background: linear-gradient(to right, var(--univalle-red), transparent);"></div>
+            <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--univalle-red); white-space: nowrap;">📋 Objetivos Específicos</span>
+            <div style="flex: 1; height: 1px; background: linear-gradient(to left, var(--univalle-red), transparent);"></div>
+          </div>
+
+          <!-- Fila 1: 3 objetivos específicos -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; flex: 0 0 auto;">
+            <div class="info-card anim-in-left anim-lift" style="border-top: 4px solid var(--univalle-red); padding: 14px 18px;">
+              <div class="info-card-title">🔍 1. Diagnóstico</div>
+              <p>Identificar deficiencias y requerimientos analíticos del área de Growth en Dataico.</p>
+            </div>
+            <div class="info-card anim-in-left anim-lift" style="border-top: 4px solid var(--gold-accent); padding: 14px 18px;">
+              <div class="info-card-title">🗂️ 2. Modelado</div>
+              <p>Determinar los indicadores clave y las fuentes de datos relevantes para el sistema.</p>
+            </div>
+            <div class="info-card anim-in-left anim-lift" style="border-top: 4px solid #3F3F46; padding: 14px 18px;">
+              <div class="info-card-title">⚙️ 3. Integración ETL</div>
+              <p>Desarrollar el modelo de procesamiento y transformación de datos automatizado.</p>
+            </div>
+          </div>
+
+          <!-- Fila 2: 2 objetivos específicos centrados -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 0 0 auto; max-width: 68%; margin: 0 auto; width: 100%;">
+            <div class="info-card anim-in-left anim-lift" style="border-top: 4px solid var(--univalle-red-light); padding: 14px 18px;">
+              <div class="info-card-title">📊 4. Visualización BI</div>
+              <p>Diseñar el modelo de visualización e inteligencia de negocios interactivo.</p>
+            </div>
+            <div class="info-card anim-in-left anim-lift" style="border-top: 4px solid var(--univalle-red-dark); padding: 14px 18px;">
+              <div class="info-card-title">✅ 5. Evaluación</div>
+              <p>Evaluar la efectividad del sistema y su impacto en la toma de decisiones.</p>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- SLIDE 4: MARCO METODOLÓGICO -->
       <section class="slide" data-slide="4" data-notes="Metodológicamente, combinamos dos enfoques complementarios: CRISP-DM como marco guía de minería de datos analítica, y Kanban como herramienta de gestión operativa diaria. Esto nos permitió gestionar las solicitudes del área mediante el tablero #growth-data, asegurando que cada entregable pasara por una fase rigurosa de control de calidad en la columna 'En Revisión' antes de salir a producción.">
-        <div class="slide-tag">Capítulo 4 • Metodología de Trabajo</div>
+        <div class="slide-tag">Metodología de Trabajo</div>
         <h2 class="slide-title">Marco Metodológico: CRISP-DM + Kanban</h2>
 
         <div class="slide-body">
@@ -1505,11 +1561,11 @@
 
       <!-- SLIDE 5: ARQUITECTURA MODULAR -->
       <section class="slide" data-slide="5" data-notes="Se diseñó una arquitectura modular desacoplada en 4 capas. En lugar de un monolito rígido, cada componente opera de forma independiente: PostgreSQL actúa como fuente de verdad, GitHub Actions y n8n orquestan los procesos en segundo plano, Metabase y Looker entregan la capa visual e IA, y un micrositio satélite en Vercel capta usuarios de forma orgánica sin recargar la base de datos transaccional.">
-        <div class="slide-tag">Capítulo 4 • Ingeniería de Software</div>
+        <div class="slide-tag">Ingeniería de Software</div>
         <h2 class="slide-title">Arquitectura Modular del Ecosistema Analítico</h2>
 
         <div class="slide-body">
-          <div class="slide-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="dense-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; align-content: center; align-items: stretch;">
             <div class="info-card anim-flip anim-lift">
               <div class="info-card-title">🗄️ 1. Capa de Base de Datos</div>
               <p><strong>PostgreSQL:</strong> Fuente central de verdad. Aloja el Data Mart y las tablas dimensionales en estrella.</p>
@@ -1532,7 +1588,7 @@
 
       <!-- SLIDE 6: DATA MART Y MODELO DIMENSIONAL -->
       <section class="slide" data-slide="6" data-notes="En la capa de datos, estructuramos un Data Mart utilizando un modelo relacional en estrella (Star Schema). Al unificar la información del cliente, las transacciones, el uso de la plataforma y las campañas comerciales en dimensiones estandarizadas, logramos que todo el equipo de Growth consulte los indicadores bajo las mismas reglas de negocio de forma optimizada.">
-        <div class="slide-tag">Capítulo 4 • Modelo de Datos</div>
+        <div class="slide-tag">Modelo de Datos</div>
         <h2 class="slide-title">Estructuración del Data Mart (Star Schema)</h2>
 
         <div class="slide-body">
@@ -1566,7 +1622,7 @@
 
       <!-- SLIDE 7: DASHBOARDS EN METABASE -->
       <section class="slide" data-slide="7" data-notes="Sobre el Data Mart desarrollamos una suite de tableros interactivos en Metabase. Destacan el Dashboard de Presupuesto, que permite monitorear el pacing de cumplimiento semanal por canal, y el Reporte de Flujo de Caja Profundo, que utiliza funciones de ventana en SQL para comparar las cohortes de ingresos interanuales de 2025 y 2026, eliminando el trabajo manual de consolidación.">
-        <div class="slide-tag">Capítulo 4 • Business Intelligence</div>
+        <div class="slide-tag">Business Intelligence</div>
         <h2 class="slide-title">Reportería Automatizada (Metabase BI)</h2>
 
         <div class="slide-body">
@@ -1587,7 +1643,7 @@
 
       <!-- SLIDE 8: PIPELINE ETL Y MONITOREO DE MRR -->
       <section class="slide" data-slide="8" data-notes="Dado que los ingresos recurrentes (MRR) cambian a lo largo del mes por pagos tardíos o ajustes, programamos un pipeline ETL en Python orquestado con GitHub Actions. El script ejecuta capturas diarias automatizadas con políticas de reintentos ante fallas de red, permitiendo al equipo financiero estimar el recaudo final de mes con un error menor al 5% desde la primera semana.">
-        <div class="slide-tag">Capítulo 4 • Automatización ETL</div>
+        <div class="slide-tag">Automatización ETL</div>
         <h2 class="slide-title">Pipeline ETL: Monitoreo Diario de MRR</h2>
 
         <div class="slide-body">
@@ -1617,7 +1673,7 @@
 
       <!-- SLIDE 9: ANÁLISIS DE CHURN CON NLP E IA -->
       <section class="slide" data-slide="9" data-notes="Para entender las causas reales de cancelación más allá de las cifras, desarrollamos un pipeline de Procesamiento de Lenguaje Natural (NLP). Extrajimos más de 13.000 conversaciones de HubSpot, las limpiamos con Python y las clasificamos semánticamente en 15 categorías usando la API de OpenAI forzando respuestas en JSON. Logramos un 98% de precisión frente a revisión humana, identificando que las dudas en la pasarela de pagos eran el principal motivo de abandono.">
-        <div class="slide-tag">Capítulo 4 • Inteligencia Artificial & NLP</div>
+        <div class="slide-tag">Inteligencia Artificial & NLP</div>
         <h2 class="slide-title">Análisis de Abandono (NLP + OpenAI LLM)</h2>
 
         <div class="slide-body">
@@ -1647,7 +1703,7 @@
 
       <!-- SLIDE 10: PROSPECCIÓN B2B EN N8N -->
       <section class="slide" data-slide="10" data-notes="En el frente de adquisición B2B, diseñamos un flujo de prospección autónoma en n8n. El sistema formula búsquedas avanzadas en Google, extrae el contenido de páginas web comerciales, lo convierte a Markdown y utiliza un agente de IA para extraer datos de contacto y redactar propuestas comerciales hiper-personalizadas de manera continua.">
-        <div class="slide-tag">Capítulo 4 • Orquestación Comercial</div>
+        <div class="slide-tag">Orquestación Comercial</div>
         <h2 class="slide-title">Prospección B2B Automatizada en n8n</h2>
 
         <div class="slide-body">
@@ -1673,7 +1729,7 @@
 
       <!-- SLIDE 11: INGENIERÍA COMO MARKETING -->
       <section class="slide" data-slide="11" data-notes="Aplicando el concepto de Ingeniería como Marketing, construimos un micrositio satélite de herramientas tributarias y de nómina gratuitas desplegado en Vercel Edge. Este portal generó atracción orgánica continua sin inversión en pauta digital. Entre febrero y junio captó 4.500 visitas, resultando en 70 nuevas suscripciones de pago e ingresos por más de 20 millones de pesos colombianos.">
-        <div class="slide-tag">Capítulo 4 • Adquisición Orgánica</div>
+        <div class="slide-tag">Adquisición Orgánica</div>
         <h2 class="slide-title">Ecosistema Satélite ("Ingeniería como Marketing")</h2>
 
         <div class="slide-body">
@@ -1705,7 +1761,7 @@
 
       <!-- SLIDE 12: RETENCIÓN Y COHORTES -->
       <section class="slide" data-slide="12" data-notes="En el módulo de retención, programamos en Google Colab un análisis de cohortes que reveló que los clientes con un solo módulo activo tenían el mayor riesgo de abandono en su primera renovación. Ejecutamos un experimento sobre 144 usuarios enviando notificaciones automatizadas por WhatsApp para promover la activación de módulos. El resultado fue un incremento en la retención inicial del 40% histórico al 42.98%.">
-        <div class="slide-tag">Capítulo 4 • Modelado de Retención</div>
+        <div class="slide-tag">Modelado de Retención</div>
         <h2 class="slide-title">Modelo de Cohortes y Experimento de Crecimiento</h2>
 
         <div class="slide-body">
@@ -1731,7 +1787,7 @@
 
       <!-- SLIDE 13: VALIDACIÓN CON USUARIOS Y QA -->
       <section class="slide" data-slide="13" data-notes="Para asegurar que las herramientas respondieran a las necesidades reales del negocio, realizamos un proceso de validación continua en las reuniones diarias con el Director de Growth (CGO), la Business Analyst y la Coordinadora de Marketing. Además, ejecutamos una matriz de 7 casos de prueba (QA) en producción, confirmando una coincidencia del 100% (0% de error) en los reportes automáticos frente a las entregas manuales previas.">
-        <div class="slide-tag">Capítulo 5 • Validación y Control de Calidad</div>
+        <div class="slide-tag">Validación y Control de Calidad</div>
         <h2 class="slide-title">Validación con Usuarios y Matriz QA</h2>
 
         <div class="slide-body">
@@ -1761,22 +1817,22 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>TC-01</strong></td>
+                  <td style="white-space: nowrap;"><strong>TC-01</strong></td>
                   <td>Auditoría Flujo de Caja vs Manual</td>
                   <td><span style="color:#10B981; font-weight:700;">100% Coincidencia (0% Error)</span></td>
                 </tr>
                 <tr>
-                  <td><strong>TC-02</strong></td>
+                  <td style="white-space: nowrap;"><strong>TC-02</strong></td>
                   <td>Resiliencia ETL MRR en Python</td>
                   <td><span style="color:#10B981; font-weight:700;">Reintentos exitosos</span></td>
                 </tr>
                 <tr>
-                  <td><strong>TC-03</strong></td>
+                  <td style="white-space: nowrap;"><strong>TC-03</strong></td>
                   <td>Clasificación NLP (13k chats)</td>
                   <td><span style="color:#10B981; font-weight:700;">98% Precisión en muestra</span></td>
                 </tr>
                 <tr>
-                  <td><strong>TC-05</strong></td>
+                  <td style="white-space: nowrap;"><strong>TC-05</strong></td>
                   <td>Experimento Cohortes Retención</td>
                   <td><span style="color:#10B981; font-weight:700;">Incremento al 42.98%</span></td>
                 </tr>
@@ -1788,23 +1844,23 @@
 
       <!-- SLIDE 14: CONCLUSIONES E IMPACTO -->
       <section class="slide" data-slide="14" data-notes="En conclusión, el proyecto logró transformar la gestión de Growth en Dataico. Operativamente, redujo tiempos de reporte de horas a segundos. Financieramente, generó ingresos directos, mejoró la retención y aportó previsibilidad en el recaudo. Y técnicamente, demostró que la combinación de arquitecturas modulares, automatización ETL e IA aporta un valor estratégico tangible.">
-        <div class="slide-tag">Capítulo 6 • Conclusiones</div>
+        <div class="slide-tag">Conclusiones</div>
         <h2 class="slide-title">Conclusiones e Impacto en Dataico</h2>
 
-        <div class="slide-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid var(--univalle-red);">
+        <div class="slide-body dense-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: center; align-items: stretch;">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid var(--univalle-red); padding: 16px 20px;">
             <div class="info-card-title">⏱️ 1. Impacto Operativo</div>
             <p>Reducción de tiempos de reportería semanal de varias horas de tabulación manual a <strong>menos de 1 minuto</strong> en Metabase BI.</p>
           </div>
-          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid var(--gold-accent);">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid var(--gold-accent); padding: 16px 20px;">
             <div class="info-card-title">🎯 2. Impacto Estratégico</div>
             <p>Estandarización de reglas de negocio en el Data Mart. Transición hacia una cultura organizacional <strong>Data-Driven</strong>.</p>
           </div>
-          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid #10B981;">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid #3F3F46; padding: 16px 20px;">
             <div class="info-card-title">💰 3. Impacto Financiero</div>
             <p>Proyección de recaudo de MRR con &lt;5% de error y captación orgánica de <strong>+$20M COP</strong> mediante herramientas gratuitas.</p>
           </div>
-          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid #3B82F6;">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid var(--univalle-red-light); padding: 16px 20px;">
             <div class="info-card-title">💡 4. Innovación Técnica</div>
             <p>Integración de modelos LLM (OpenAI) para convertir datos cualitativos no estructurados (13k chats) en métricas cuantitativas.</p>
           </div>
@@ -1813,7 +1869,7 @@
 
       <!-- SLIDE 15: TRABAJOS FUTUROS Y CIERRE -->
       <section class="slide" data-slide="15" data-notes="Como trabajos futuros, se propone entrenar modelos predictivos de Machine Learning sobre el Data Mart estructurado para anticipar la cancelación de clientes, así como implementar recomendaciones in-app. Agradezco enormemente a mi tutor, al equipo de Dataico y a los evaluadores por su atención. Quedo a su disposición para resolver sus inquietudes.">
-        <div class="slide-tag">Capítulo 6 • Trabajos Futuros & Cierre</div>
+        <div class="slide-tag">Trabajos Futuros & Cierre</div>
         <h2 class="slide-title">Trabajos Futuros y Cierre de la Sustentación</h2>
 
         <div class="slide-body">
@@ -1833,13 +1889,13 @@
           </div>
 
           <div class="slide-col" style="justify-content: center;">
-            <div class="metric-box anim-float anim-glow-gold" style="padding: 32px; background: linear-gradient(135deg, var(--univalle-red-dark), rgba(15, 23, 42, 0.9));">
+            <div class="metric-box anim-float anim-glow-gold" style="padding: 32px; background: linear-gradient(135deg, var(--univalle-red), var(--univalle-red-dark));">
               <div style="font-size: 2.8rem; margin-bottom: 12px;"><span class="i-sway">🎓</span></div>
-              <div class="metric-value" style="font-size: 1.9rem;">¡Muchas Gracias!</div>
-              <p style="color: var(--gold-accent); font-weight: 700; margin-top: 6px;">
+              <div class="metric-value" style="font-size: 2.15rem; color: #FFFFFF; background: none; -webkit-background-clip: initial; -webkit-text-fill-color: initial;">¡Muchas Gracias!</div>
+              <p style="color: #FFFFFF; font-weight: 700; margin-top: 6px;">
                 Espacio Abierto para Preguntas del Jurado
               </p>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 12px;">
+              <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.82); margin-top: 12px;">
                 Víctor Manuel Alzate Morales • Universidad del Valle
               </p>
             </div>
@@ -1889,7 +1945,7 @@
   <!-- OVERVIEW MATRIX MODAL -->
   <div id="overview-modal">
     <div class="overview-header">
-      <h2 style="font-family:'Outfit',sans-serif; color:#FFF; font-size:1.5rem;">&#x1F39B;&#xFE0F; Vista General de Diapositivas</h2>
+      <h2 style="font-family:'Outfit',sans-serif; color:var(--text-main); font-size:1.65rem;">&#x1F39B;&#xFE0F; Vista General de Diapositivas</h2>
       <button class="icon-btn" onclick="toggleOverview()">&#x2715; Cerrar (Esc)</button>
     </div>
     <div class="overview-grid" id="overview-grid-container">
@@ -1939,7 +1995,7 @@
       slides.forEach((slide, idx) => {
         const slideNum = idx + 1;
         const titleText = slide.querySelector('.slide-title').childNodes[0].textContent.trim();
-        
+
         const card = document.createElement('div');
         card.className = `overview-card ${slideNum === currentSlide ? 'active-card' : ''}`;
         card.onclick = () => {
@@ -2069,7 +2125,7 @@
       if (isLaserActive) {
         laserPointer.style.left = `${e.clientX}px`;
         laserPointer.style.top = `${e.clientY}px`;
-        
+
         setTimeout(() => {
           laserTrail.style.left = `${e.clientX}px`;
           laserTrail.style.top = `${e.clientY}px`;
