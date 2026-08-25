@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SustentaciÃ³n Trabajo de Grado | VÃ­ctor Manuel Alzate Morales - Univalle</title>
+  <title>Sustentación Trabajo de Grado | Víctor Manuel Alzate Morales - Univalle</title>
   
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -409,6 +409,12 @@
       height: 100%;
       object-fit: contain;
       flex: 1;
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
+    }
+
+    .image-container img:hover {
+      opacity: 0.88;
     }
 
     .image-caption {
@@ -649,6 +655,146 @@
       color: #FFFFFF;
       line-height: 1.3;
     }
+
+    /* =========================================================
+       LIGHTBOX CON ZOOM
+       ========================================================= */
+
+    /* Hint de ampliacion sobre la imagen */
+    .image-container {
+      position: relative;
+    }
+    .image-zoom-hint {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(9, 13, 22, 0.75);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      padding: 3px 7px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 2;
+    }
+    .image-container:hover .image-zoom-hint {
+      opacity: 1;
+    }
+
+    /* Overlay del lightbox */
+    #lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 16, 0.96);
+      backdrop-filter: blur(18px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #lightbox-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Contenedor de la imagen en el lightbox */
+    #lightbox-img-wrap {
+      position: relative;
+      overflow: hidden;
+      width: 90vw;
+      height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+    #lightbox-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transform-origin: center center;
+      transform: scale(1) translate(0px, 0px);
+      transition: transform 0.15s ease;
+      cursor: grab;
+      user-select: none;
+      pointer-events: auto;
+      display: block;
+    }
+    #lightbox-img.dragging {
+      cursor: grabbing;
+      transition: none;
+    }
+
+    /* Barra de controles del lightbox */
+    #lightbox-controls {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 10001;
+    }
+    .lb-btn {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-fast);
+      backdrop-filter: blur(8px);
+    }
+    .lb-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--univalle-red);
+    }
+    #lb-zoom-level {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--gold-accent);
+      min-width: 52px;
+      text-align: center;
+      padding: 7px 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Pie de foto en el lightbox */
+    #lightbox-caption {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(9, 13, 22, 0.88);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      padding: 7px 18px;
+      backdrop-filter: blur(8px);
+      z-index: 10001;
+      white-space: nowrap;
+      max-width: 80vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 <body>
@@ -676,23 +822,22 @@
           <span class="univalle-text">UNIVALLE</span>
         </div>
         <div class="project-header-title">
-          Trabajo de Grado | VÃ­ctor Manuel Alzate Morales
+          Trabajo de Grado | Víctor Manuel Alzate Morales
         </div>
       </div>
 
       <div class="header-actions">
-        <a href="presentacion_tesis.pdf" download class="icon-btn" title="Descargar Presentación PDF" style="text-decoration:none;">📄 Descargar PDF</a>
-        <button class="icon-btn" id="btn-laser" onclick="toggleLaser()" title="Activar Puntero LÃ¡ser (Tecla L)">
-          ðŸ”´ Puntero LÃ¡ser <kbd style="font-size:0.7rem; opacity:0.7;">(L)</kbd>
+        <button class="icon-btn" id="btn-laser" onclick="toggleLaser()" title="Activar Puntero Láser (Tecla L)">
+          🔴 Puntero Láser <kbd style="font-size:0.7rem; opacity:0.7;">(L)</kbd>
         </button>
         <button class="icon-btn" id="btn-notes" onclick="toggleNotes()" title="Ver Notas del Orador (Tecla N)">
-          ðŸ“ Notas <kbd style="font-size:0.7rem; opacity:0.7;">(N)</kbd>
+          📝 Notas <kbd style="font-size:0.7rem; opacity:0.7;">(N)</kbd>
         </button>
         <button class="icon-btn" onclick="toggleOverview()" title="Vista General de Diapositivas (Tecla O)">
-          ðŸŽ›ï¸ Vista General <kbd style="font-size:0.7rem; opacity:0.7;">(O)</kbd>
+          🎛️ Vista General <kbd style="font-size:0.7rem; opacity:0.7;">(O)</kbd>
         </button>
         <button class="icon-btn" onclick="toggleFullscreen()" title="Pantalla Completa (Tecla F)">
-          â›¶ Pantalla Completa
+          ⛶ Pantalla Completa
         </button>
       </div>
     </header>
@@ -701,30 +846,30 @@
     <main id="slide-viewport">
 
       <!-- SLIDE 1: PORTADA -->
-      <section class="slide active" data-slide="1" data-notes="Buenos dÃ­as a los miembros del jurado y asistentes. Hoy presento mi trabajo de grado titulado 'ImplementaciÃ³n de un sistema analÃ­tico para el monitoreo y optimizaciÃ³n de estrategias de crecimiento de clientes en el Ã¡rea de Growth en Dataico'. Este proyecto responde a la necesidad de transformar procesos analÃ­ticos manuales en un ecosistema automatizado y basado en datos para una empresa SaaS real.">
-        <div class="slide-tag">Universidad del Valle â€¢ Facultad de IngenierÃ­a</div>
-        <h1 class="slide-title">ImplementaciÃ³n de un sistema analÃ­tico para el monitoreo y optimizaciÃ³n de estrategias de crecimiento de clientes en el Ã¡rea de Growth en Dataico</h1>
+      <section class="slide active" data-slide="1" data-notes="Buenos días a los miembros del jurado y asistentes. Hoy presento mi trabajo de grado titulado 'Implementación de un sistema analítico para el monitoreo y optimización de estrategias de crecimiento de clientes en el área de Growth en Dataico'. Este proyecto responde a la necesidad de transformar procesos analíticos manuales en un ecosistema automatizado y basado en datos para una empresa SaaS real.">
+        <div class="slide-tag">Universidad del Valle • Facultad de Ingeniería</div>
+        <h1 class="slide-title">Implementación de un sistema analítico para el monitoreo y optimización de estrategias de crecimiento de clientes en el área de Growth en Dataico</h1>
         
         <div class="slide-body" style="align-items: center;">
           <div class="slide-col" style="flex: 1.2;">
             <div class="info-card" style="border-left: 4px solid var(--univalle-red); background: rgba(200, 16, 46, 0.08);">
-              <div class="info-card-title">ðŸŽ“ SustentaciÃ³n de Trabajo de Grado</div>
+              <div class="info-card-title">🎓 Sustentación de Trabajo de Grado</div>
               <p style="font-size: 1rem; color: #FFFFFF; font-weight: 600; margin-bottom: 6px;">
-                Modalidad PasantÃ­a AcadÃ©mica
+                Modalidad Pasantía Académica
               </p>
-              <p>Escuela de IngenierÃ­a de Sistemas y ComputaciÃ³n â€¢ Programa de IngenierÃ­a de Sistemas</p>
-              <p style="color: var(--gold-accent); margin-top: 4px;">Sede TuluÃ¡ â€“ Valle del Cauca, 2026</p>
+              <p>Escuela de Ingeniería de Sistemas y Computación • Programa de Ingeniería de Sistemas</p>
+              <p style="color: var(--gold-accent); margin-top: 4px;">Sede Tuluá – Valle del Cauca, 2026</p>
             </div>
 
             <div class="metric-grid">
               <div class="info-card">
-                <div class="info-card-title">ðŸ‘¨â€ðŸ’» Autor</div>
-                <p style="color: #FFF; font-weight: 700;">VÃ­ctor Manuel Alzate Morales</p>
-                <p style="font-size: 0.82rem;">CÃ³digo: 2313022</p>
+                <div class="info-card-title">👨‍💻 Autor</div>
+                <p style="color: #FFF; font-weight: 700;">Víctor Manuel Alzate Morales</p>
+                <p style="font-size: 0.82rem;">Código: 2313022</p>
               </div>
               <div class="info-card">
-                <div class="info-card-title">ðŸ‘¨â€ðŸ« Director de Tesis</div>
-                <p style="color: #FFF; font-weight: 700;">Mauricio LÃ³pez BenÃ­tez</p>
+                <div class="info-card-title">👨‍🏫 Director de Tesis</div>
+                <p style="color: #FFF; font-weight: 700;">Mauricio López Benítez</p>
                 <p style="font-size: 0.82rem;">Profesor Univalle</p>
               </div>
             </div>
@@ -732,11 +877,11 @@
 
           <div class="slide-col" style="flex: 0.8;">
             <div class="metric-box" style="padding: 28px;">
-              <div style="font-size: 3rem; margin-bottom: 8px;">ðŸš€</div>
+              <div style="font-size: 3rem; margin-bottom: 8px;">🚀</div>
               <div class="metric-value">Dataico</div>
-              <div class="metric-label">Empresa SaaS de FacturaciÃ³n ElectrÃ³nica</div>
+              <div class="metric-label">Empresa SaaS de Facturación Electrónica</div>
               <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 10px;">
-                Ecosistema de inteligencia de negocios y automatizaciÃ³n analÃ­tica sobre el Ã¡rea de Growth.
+                Ecosistema de inteligencia de negocios y automatización analítica sobre el área de Growth.
               </p>
             </div>
           </div>
@@ -744,30 +889,30 @@
       </section>
 
       <!-- SLIDE 2: CONTEXTO Y PROBLEMA -->
-      <section class="slide" data-slide="2" data-notes="En el Ã¡rea de Growth de Dataico, los datos de los usuarios se encontraban dispersos en mÃºltiples plataformas transaccionales y de marketing. Esto obligaba a los analistas a dedicar horas cada semana consolidando informes manuales en Excel, lo que generaba riesgo de errores humanos, discrepancias en los nÃºmeros de recaudo e imposibilitaba realizar anÃ¡lisis predictivos o cualitativos sobre el comportamiento de los clientes.">
-        <div class="slide-tag">CapÃ­tulo 1 â€¢ Planteamiento del Problema</div>
-        <h2 class="slide-title">Contexto Operativo y ProblemÃ¡tica del Negocio</h2>
+      <section class="slide" data-slide="2" data-notes="En el área de Growth de Dataico, los datos de los usuarios se encontraban dispersos en múltiples plataformas transaccionales y de marketing. Esto obligaba a los analistas a dedicar horas cada semana consolidando informes manuales en Excel, lo que generaba riesgo de errores humanos, discrepancias en los números de recaudo e imposibilitaba realizar análisis predictivos o cualitativos sobre el comportamiento de los clientes.">
+        <div class="slide-tag">Capítulo 1 • Planteamiento del Problema</div>
+        <h2 class="slide-title">Contexto Operativo y Problemática del Negocio</h2>
 
         <div class="slide-body">
           <div class="slide-col">
             <div class="info-card" style="border-left: 4px solid #EF4444;">
-              <div class="info-card-title" style="color: #EF4444;">âŒ 1. DispersiÃ³n de Fuentes de Datos</div>
-              <p>InformaciÃ³n aislada en PostgreSQL (base transaccional), HubSpot (CRM y soporte) y Google Analytics. Falta de una fuente Ãºnica de verdad.</p>
+              <div class="info-card-title" style="color: #EF4444;">❌ 1. Dispersión de Fuentes de Datos</div>
+              <p>Información aislada en PostgreSQL (base transaccional), HubSpot (CRM y soporte) y Google Analytics. Falta de una fuente única de verdad.</p>
             </div>
             <div class="info-card" style="border-left: 4px solid #F59E0B;">
-              <div class="info-card-title" style="color: #F59E0B;">âš ï¸ 2. ReporterÃ­a Manual Repetitiva</div>
-              <p>Varias horas semanales dedicadas a consolidar hojas de cÃ¡lculo en Excel. Riesgo constante de error humano y discrepancias en mÃ©tricas financieras.</p>
+              <div class="info-card-title" style="color: #F59E0B;">⚠️ 2. Reportería Manual Repetitiva</div>
+              <p>Varias horas semanales dedicadas a consolidar hojas de cálculo en Excel. Riesgo constante de error humano y discrepancias en métricas financieras.</p>
             </div>
             <div class="info-card" style="border-left: 4px solid #3B82F6;">
-              <div class="info-card-title" style="color: #60A5FA;">ðŸ“‰ 3. Toma de Decisiones Reactiva</div>
-              <p>Volatilidad no registrada en el recaudo diario (MRR) y falta de anÃ¡lisis cualitativo estructurado sobre las causas reales del abandono de clientes (Churn).</p>
+              <div class="info-card-title" style="color: #60A5FA;">📉 3. Toma de Decisiones Reactiva</div>
+              <p>Volatilidad no registrada en el recaudo diario (MRR) y falta de análisis cualitativo estructurado sobre las causas reales del abandono de clientes (Churn).</p>
             </div>
           </div>
 
           <div class="slide-col">
             <div class="metric-box" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
               <div class="metric-value" style="color: var(--univalle-red-light);">+5 Horas</div>
-              <div class="metric-label" style="margin-bottom: 16px;">Perdidas semanalmente en tabulaciÃ³n manual</div>
+              <div class="metric-label" style="margin-bottom: 16px;">Perdidas semanalmente en tabulación manual</div>
               
               <div style="border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 14px;"></div>
               
@@ -779,69 +924,69 @@
       </section>
 
       <!-- SLIDE 3: OBJETIVOS Y TRAZABILIDAD -->
-      <section class="slide" data-slide="3" data-notes="Para solucionar esta problemÃ¡tica se planteÃ³ como objetivo general implementar un sistema analÃ­tico modular. Este objetivo se dividiÃ³ en 5 etapas secuenciales: desde el diagnÃ³stico de necesidades y el modelado dimensional de la base de datos, hasta el desarrollo de pipelines ETL, paneles de Inteligencia de Negocios y la posterior evaluaciÃ³n de efectividad con el equipo directivo.">
-        <div class="slide-tag">CapÃ­tulo 1 â€¢ FormulaciÃ³n del Proyecto</div>
-        <h2 class="slide-title">Objetivos EspecÃ­ficos y Resultados Esperados</h2>
+      <section class="slide" data-slide="3" data-notes="Para solucionar esta problemática se planteó como objetivo general implementar un sistema analítico modular. Este objetivo se dividió en 5 etapas secuenciales: desde el diagnóstico de necesidades y el modelado dimensional de la base de datos, hasta el desarrollo de pipelines ETL, paneles de Inteligencia de Negocios y la posterior evaluación de efectividad con el equipo directivo.">
+        <div class="slide-tag">Capítulo 1 • Formulación del Proyecto</div>
+        <h2 class="slide-title">Objetivos Específicos y Resultados Esperados</h2>
 
         <div class="slide-body" style="flex-direction: column;">
           <p style="color: var(--text-muted); margin-bottom: 10px;">
-            <strong>Objetivo General:</strong> Implementar un sistema analÃ­tico modular con el propÃ³sito de estandarizar y optimizar el monitoreo de las estrategias de adquisiciÃ³n, activaciÃ³n y retenciÃ³n de clientes en el Ã¡rea de Growth.
+            <strong>Objetivo General:</strong> Implementar un sistema analítico modular con el propósito de estandarizar y optimizar el monitoreo de las estrategias de adquisición, activación y retención de clientes en el área de Growth.
           </p>
 
           <table class="slide-table">
             <thead>
               <tr>
-                <th style="width: 45%;">Objetivo EspecÃ­fico</th>
+                <th style="width: 45%;">Objetivo Específico</th>
                 <th style="width: 55%;">Resultado Esperado Proyectado (Entregable)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>1. DiagnÃ³stico:</strong> Identificar deficiencias y requerimientos analÃ­ticos del Ã¡rea.</td>
-                <td>Documento de diagnÃ³stico y catÃ¡logo formalizado de mÃ©tricas de Growth.</td>
+                <td><strong>1. Diagnóstico:</strong> Identificar deficiencias y requerimientos analíticos del área.</td>
+                <td>Documento de diagnóstico y catálogo formalizado de métricas de Growth.</td>
               </tr>
               <tr>
                 <td><strong>2. Modelado:</strong> Determinar indicadores y fuentes de datos clave.</td>
                 <td>Modelo dimensional de datos en estrella (Star Schema) en PostgreSQL.</td>
               </tr>
               <tr>
-                <td><strong>3. IntegraciÃ³n ETL:</strong> Desarrollar modelo de procesamiento automatizado.</td>
-                <td>Pipelines ETL en Python (captura MRR) y flujo NLP/LLM para anÃ¡lisis de Churn.</td>
+                <td><strong>3. Integración ETL:</strong> Desarrollar modelo de procesamiento automatizado.</td>
+                <td>Pipelines ETL en Python (captura MRR) y flujo NLP/LLM para análisis de Churn.</td>
               </tr>
               <tr>
-                <td><strong>4. VisualizaciÃ³n BI:</strong> DiseÃ±ar modelo de visualizaciÃ³n interactiva.</td>
+                <td><strong>4. Visualización BI:</strong> Diseñar modelo de visualización interactiva.</td>
                 <td>Suite de dashboards en Metabase y Looker Studio con vistas de presupuesto y caja.</td>
               </tr>
               <tr>
-                <td><strong>5. EvaluaciÃ³n:</strong> Evaluar efectividad e impacto en la toma de decisiones.</td>
-                <td>MetodologÃ­a QA (0% error) e informe de impacto operativo, estratÃ©gico y financiero.</td>
+                <td><strong>5. Evaluación:</strong> Evaluar efectividad e impacto en la toma de decisiones.</td>
+                <td>Metodología QA (0% error) e informe de impacto operativo, estratégico y financiero.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <!-- SLIDE 4: MARCO METODOLÃ“GICO -->
-      <section class="slide" data-slide="4" data-notes="MetodolÃ³gicamente, combinamos dos enfoques complementarios: CRISP-DM como marco guÃ­a de minerÃ­a de datos analÃ­tica, y Kanban como herramienta de gestiÃ³n operativa diaria. Esto nos permitiÃ³ gestionar las solicitudes del Ã¡rea mediante el tablero #growth-data, asegurando que cada entregable pasara por una fase rigurosa de control de calidad en la columna 'En RevisiÃ³n' antes de salir a producciÃ³n.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ MetodologÃ­a de Trabajo</div>
-        <h2 class="slide-title">Marco MetodolÃ³gico: CRISP-DM + Kanban</h2>
+      <!-- SLIDE 4: MARCO METODOLÓGICO -->
+      <section class="slide" data-slide="4" data-notes="Metodológicamente, combinamos dos enfoques complementarios: CRISP-DM como marco guía de minería de datos analítica, y Kanban como herramienta de gestión operativa diaria. Esto nos permitió gestionar las solicitudes del área mediante el tablero #growth-data, asegurando que cada entregable pasara por una fase rigurosa de control de calidad en la columna 'En Revisión' antes de salir a producción.">
+        <div class="slide-tag">Capítulo 4 • Metodología de Trabajo</div>
+        <h2 class="slide-title">Marco Metodológico: CRISP-DM + Kanban</h2>
 
         <div class="slide-body">
           <div class="slide-col">
             <div class="info-card">
-              <div class="info-card-title">ðŸ“Š MetodologÃ­a AnalÃ­tica (CRISP-DM)</div>
+              <div class="info-card-title">📊 Metodología Analítica (CRISP-DM)</div>
               <ul>
-                <li>Entendimiento del negocio y diagnÃ³stico de datos.</li>
-                <li>PreparaciÃ³n y modelado dimensional (Star Schema).</li>
-                <li>EvaluaciÃ³n de efectividad y despliegue continuo.</li>
+                <li>Entendimiento del negocio y diagnóstico de datos.</li>
+                <li>Preparación y modelado dimensional (Star Schema).</li>
+                <li>Evaluación de efectividad y despliegue continuo.</li>
               </ul>
             </div>
             <div class="info-card">
-              <div class="info-card-title">ðŸ“‹ GestiÃ³n Operativa (Kanban `#growth-data`)</div>
+              <div class="info-card-title">📋 Gestión Operativa (Kanban `#growth-data`)</div>
               <ul>
-                <li><strong>Nevera (Backlog):</strong> PriorizaciÃ³n estratÃ©gica.</li>
+                <li><strong>Nevera (Backlog):</strong> Priorización estratégica.</li>
                 <li><strong>En Progreso:</strong> Desarrollo en SQL, Python, Metabase.</li>
-                <li><strong>En RevisiÃ³n:</strong> Fase de Control de Calidad (QA) con usuarios.</li>
+                <li><strong>En Revisión:</strong> Fase de Control de Calidad (QA) con usuarios.</li>
                 <li><strong>Listo semana (Done):</strong> Entrega final aprobada.</li>
               </ul>
             </div>
@@ -850,57 +995,57 @@
           <div class="slide-col slide-col-wide">
             <div class="image-container">
               <img src="Capitulo_4/imagenes/kanban.png" alt="Tablero Kanban de Growth" />
-              <div class="image-caption">Tablero Kanban del canal #growth-data utilizado durante la pasantÃ­a</div>
+              <div class="image-caption">Tablero Kanban del canal #growth-data utilizado durante la pasantía</div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- SLIDE 5: ARQUITECTURA MODULAR -->
-      <section class="slide" data-slide="5" data-notes="Se diseÃ±Ã³ una arquitectura modular desacoplada en 4 capas. En lugar de un monolito rÃ­gido, cada componente opera de forma independiente: PostgreSQL actÃºa como fuente de verdad, GitHub Actions y n8n orquestan los procesos en segundo plano, Metabase y Looker entregan la capa visual e IA, y un micrositio satÃ©lite en Vercel capta usuarios de forma orgÃ¡nica sin recargar la base de datos transaccional.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ IngenierÃ­a de Software</div>
-        <h2 class="slide-title">Arquitectura Modular del Ecosistema AnalÃ­tico</h2>
+      <section class="slide" data-slide="5" data-notes="Se diseñó una arquitectura modular desacoplada en 4 capas. En lugar de un monolito rígido, cada componente opera de forma independiente: PostgreSQL actúa como fuente de verdad, GitHub Actions y n8n orquestan los procesos en segundo plano, Metabase y Looker entregan la capa visual e IA, y un micrositio satélite en Vercel capta usuarios de forma orgánica sin recargar la base de datos transaccional.">
+        <div class="slide-tag">Capítulo 4 • Ingeniería de Software</div>
+        <h2 class="slide-title">Arquitectura Modular del Ecosistema Analítico</h2>
 
         <div class="slide-body">
           <div class="slide-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
             <div class="info-card">
-              <div class="info-card-title">ðŸ—„ï¸ 1. Capa de Base de Datos</div>
+              <div class="info-card-title">🗄️ 1. Capa de Base de Datos</div>
               <p><strong>PostgreSQL:</strong> Fuente central de verdad. Aloja el Data Mart y las tablas dimensionales en estrella.</p>
             </div>
             <div class="info-card">
-              <div class="info-card-title">âš¡ 2. Capa de OrquestaciÃ³n</div>
-              <p><strong>GitHub Actions + Python:</strong> Captura diaria de MRR a las 00:00.<br><strong>n8n:</strong> Workflows autÃ³nomos de prospecciÃ³n B2B.</p>
+              <div class="info-card-title">⚡ 2. Capa de Orquestación</div>
+              <p><strong>GitHub Actions + Python:</strong> Captura diaria de MRR a las 00:00.<br><strong>n8n:</strong> Workflows autónomos de prospección B2B.</p>
             </div>
             <div class="info-card">
-              <div class="info-card-title">ðŸ“ˆ 3. VisualizaciÃ³n e IA</div>
-              <p><strong>Metabase BI:</strong> Dashboards de presupuesto y caja.<br><strong>OpenAI Agent (LLM):</strong> ClasificaciÃ³n de chats.<br><strong>Looker Studio:</strong> Reporte Churn.</p>
+              <div class="info-card-title">📈 3. Visualización e IA</div>
+              <p><strong>Metabase BI:</strong> Dashboards de presupuesto y caja.<br><strong>OpenAI Agent (LLM):</strong> Clasificación de chats.<br><strong>Looker Studio:</strong> Reporte Churn.</p>
             </div>
             <div class="info-card">
-              <div class="info-card-title">ðŸŒ 4. AdquisiciÃ³n OrgÃ¡nica</div>
-              <p><strong>Vercel Edge:</strong> Micrositio de herramientas gratuitas.<br><strong>Google Analytics:</strong> AtribuciÃ³n de eventos.</p>
+              <div class="info-card-title">🌐 4. Adquisición Orgánica</div>
+              <p><strong>Vercel Edge:</strong> Micrositio de herramientas gratuitas.<br><strong>Google Analytics:</strong> Atribución de eventos.</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- SLIDE 6: DATA MART Y MODELO DIMENSIONAL -->
-      <section class="slide" data-slide="6" data-notes="En la capa de datos, estructuramos un Data Mart utilizando un modelo relacional en estrella (Star Schema). Al unificar la informaciÃ³n del cliente, las transacciones, el uso de la plataforma y las campaÃ±as comerciales en dimensiones estandarizadas, logramos que todo el equipo de Growth consulte los indicadores bajo las mismas reglas de negocio de forma optimizada.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ Modelo de Datos</div>
-        <h2 class="slide-title">EstructuraciÃ³n del Data Mart (Star Schema)</h2>
+      <section class="slide" data-slide="6" data-notes="En la capa de datos, estructuramos un Data Mart utilizando un modelo relacional en estrella (Star Schema). Al unificar la información del cliente, las transacciones, el uso de la plataforma y las campañas comerciales en dimensiones estandarizadas, logramos que todo el equipo de Growth consulte los indicadores bajo las mismas reglas de negocio de forma optimizada.">
+        <div class="slide-tag">Capítulo 4 • Modelo de Datos</div>
+        <h2 class="slide-title">Estructuración del Data Mart (Star Schema)</h2>
 
         <div class="slide-body">
           <div class="slide-col">
             <div class="info-card" style="border-left: 4px solid var(--gold-accent);">
-              <div class="info-card-title">â­ Tabla de Hechos Central</div>
+              <div class="info-card-title">⭐ Tabla de Hechos Central</div>
               <p><strong>Fact_Transacciones / Fact_MRR:</strong> Registra movimientos financieros diarios, nuevos pagos, renovaciones, contracciones y cancelaciones.</p>
             </div>
             <div class="info-card">
-              <div class="info-card-title">ðŸ“Œ Tablas de Dimensiones</div>
+              <div class="info-card-title">📌 Tablas de Dimensiones</div>
               <ul>
-                <li><strong>Dim_Cliente:</strong> ID anÃ³nimo, fechas de activaciÃ³n, industria.</li>
-                <li><strong>Dim_Planes:</strong> HistÃ³rico de planes y mÃ³dulos contratados.</li>
-                <li><strong>Dim_Uso_Diario:</strong> Volumen de emisiÃ³n de facturas electrÃ³nicas.</li>
-                <li><strong>Dim_Campanas:</strong> AtribuciÃ³n de canal y costo publicitario.</li>
+                <li><strong>Dim_Cliente:</strong> ID anónimo, fechas de activación, industria.</li>
+                <li><strong>Dim_Planes:</strong> Histórico de planes y módulos contratados.</li>
+                <li><strong>Dim_Uso_Diario:</strong> Volumen de emisión de facturas electrónicas.</li>
+                <li><strong>Dim_Campanas:</strong> Atribución de canal y costo publicitario.</li>
               </ul>
             </div>
           </div>
@@ -908,9 +1053,9 @@
           <div class="slide-col">
             <div class="metric-box">
               <div class="metric-value">Unificado</div>
-              <div class="metric-label">Reglas de negocio homogÃ©neas para MRR, Churn y CAC</div>
+              <div class="metric-label">Reglas de negocio homogéneas para MRR, Churn y CAC</div>
               <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 12px;">
-                Elimina discrepancias entre el equipo financiero, comercial y el Ã¡rea de tecnologÃ­a.
+                Elimina discrepancias entre el equipo financiero, comercial y el área de tecnología.
               </p>
             </div>
           </div>
@@ -918,9 +1063,9 @@
       </section>
 
       <!-- SLIDE 7: DASHBOARDS EN METABASE -->
-      <section class="slide" data-slide="7" data-notes="Sobre el Data Mart desarrollamos una suite de tableros interactivos en Metabase. Destacan el Dashboard de Presupuesto, que permite monitorear el pacing de cumplimiento semanal por canal, y el Reporte de Flujo de Caja Profundo, que utiliza funciones de ventana en SQL para comparar las cohortes de ingresos interanuales de 2025 y 2026, eliminando el trabajo manual de consolidaciÃ³n.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ Business Intelligence</div>
-        <h2 class="slide-title">ReporterÃ­a Automatizada (Metabase BI)</h2>
+      <section class="slide" data-slide="7" data-notes="Sobre el Data Mart desarrollamos una suite de tableros interactivos en Metabase. Destacan el Dashboard de Presupuesto, que permite monitorear el pacing de cumplimiento semanal por canal, y el Reporte de Flujo de Caja Profundo, que utiliza funciones de ventana en SQL para comparar las cohortes de ingresos interanuales de 2025 y 2026, eliminando el trabajo manual de consolidación.">
+        <div class="slide-tag">Capítulo 4 • Business Intelligence</div>
+        <h2 class="slide-title">Reportería Automatizada (Metabase BI)</h2>
 
         <div class="slide-body">
           <div class="slide-col">
@@ -939,101 +1084,101 @@
       </section>
 
       <!-- SLIDE 8: PIPELINE ETL Y MONITOREO DE MRR -->
-      <section class="slide" data-slide="8" data-notes="Dado que los ingresos recurrentes (MRR) cambian a lo largo del mes por pagos tardÃ­os o ajustes, programamos un pipeline ETL en Python orquestado con GitHub Actions. El script ejecuta capturas diarias automatizadas con polÃ­ticas de reintentos ante fallas de red, permitiendo al equipo financiero estimar el recaudo final de mes con un error menor al 5% desde la primera semana.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ AutomatizaciÃ³n ETL</div>
+      <section class="slide" data-slide="8" data-notes="Dado que los ingresos recurrentes (MRR) cambian a lo largo del mes por pagos tardíos o ajustes, programamos un pipeline ETL en Python orquestado con GitHub Actions. El script ejecuta capturas diarias automatizadas con políticas de reintentos ante fallas de red, permitiendo al equipo financiero estimar el recaudo final de mes con un error menor al 5% desde la primera semana.">
+        <div class="slide-tag">Capítulo 4 • Automatización ETL</div>
         <h2 class="slide-title">Pipeline ETL: Monitoreo Diario de MRR</h2>
 
         <div class="slide-body">
           <div class="slide-col" style="flex: 0.9;">
             <div class="info-card">
-              <div class="info-card-title">ðŸ”„ OrquestaciÃ³n Serverless</div>
+              <div class="info-card-title">🔄 Orquestación Serverless</div>
               <p>Script Python ejecutado diariamente a las 00:00 mediante <strong>GitHub Actions</strong> con manejo seguro de secretos API.</p>
             </div>
             <div class="info-card">
-              <div class="info-card-title">ðŸ›¡ï¸ Resiliencia y Reintentos</div>
-              <p>Control de excepciones automatizado ante caÃ­das temporales de red o latencia de servidores.</p>
+              <div class="info-card-title">🛡️ Resiliencia y Reintentos</div>
+              <p>Control de excepciones automatizado ante caídas temporales de red o latencia de servidores.</p>
             </div>
             <div class="metric-box">
               <div class="metric-value">&lt; 5% Error</div>
-              <div class="metric-label">Margen de precisiÃ³n en la proyecciÃ³n de cierre mensual de ingresos</div>
+              <div class="metric-label">Margen de precisión en la proyección de cierre mensual de ingresos</div>
             </div>
           </div>
 
           <div class="slide-col slide-col-wide">
             <div class="image-container">
               <img src="Capitulo_4/imagenes/volatilidad_mrr.png" alt="Monitoreo MRR Python" />
-              <div class="image-caption">Registro diario automatizado de estabilizaciÃ³n y volatilidad financiera</div>
+              <div class="image-caption">Registro diario automatizado de estabilización y volatilidad financiera</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: ANÃLISIS DE CHURN CON NLP E IA -->
-      <section class="slide" data-slide="9" data-notes="Para entender las causas reales de cancelaciÃ³n mÃ¡s allÃ¡ de las cifras, desarrollamos un pipeline de Procesamiento de Lenguaje Natural (NLP). Extrajimos mÃ¡s de 13.000 conversaciones de HubSpot, las limpiamos con Python y las clasificamos semÃ¡nticamente en 15 categorÃ­as usando la API de OpenAI forzando respuestas en JSON. Logramos un 98% de precisiÃ³n frente a revisiÃ³n humana, identificando que las dudas en la pasarela de pagos eran el principal motivo de abandono.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ Inteligencia Artificial & NLP</div>
-        <h2 class="slide-title">AnÃ¡lisis de Abandono (NLP + OpenAI LLM)</h2>
+      <!-- SLIDE 9: ANÁLISIS DE CHURN CON NLP E IA -->
+      <section class="slide" data-slide="9" data-notes="Para entender las causas reales de cancelación más allá de las cifras, desarrollamos un pipeline de Procesamiento de Lenguaje Natural (NLP). Extrajimos más de 13.000 conversaciones de HubSpot, las limpiamos con Python y las clasificamos semánticamente en 15 categorías usando la API de OpenAI forzando respuestas en JSON. Logramos un 98% de precisión frente a revisión humana, identificando que las dudas en la pasarela de pagos eran el principal motivo de abandono.">
+        <div class="slide-tag">Capítulo 4 • Inteligencia Artificial & NLP</div>
+        <h2 class="slide-title">Análisis de Abandono (NLP + OpenAI LLM)</h2>
 
         <div class="slide-body">
           <div class="slide-col slide-col-wide">
             <div class="image-container">
               <img src="Capitulo_4/imagenes/analisis_churn.png" alt="Reporte Churn Looker Studio" />
-              <div class="image-caption">VisualizaciÃ³n de motivos de abandono en Looker Studio tras clasificaciÃ³n con IA</div>
+              <div class="image-caption">Visualización de motivos de abandono en Looker Studio tras clasificación con IA</div>
             </div>
           </div>
 
           <div class="slide-col" style="flex: 0.9;">
             <div class="metric-box">
               <div class="metric-value">+13.000</div>
-              <div class="metric-label">Chats histÃ³ricos de soporte procesados</div>
+              <div class="metric-label">Chats históricos de soporte procesados</div>
             </div>
             <div class="metric-box" style="margin-top: 10px;">
               <div class="metric-value">98%</div>
-              <div class="metric-label">PrecisiÃ³n validada en muestra aleatoria de control</div>
+              <div class="metric-label">Precisión validada en muestra aleatoria de control</div>
             </div>
             <div class="info-card" style="margin-top: 10px;">
-              <div class="info-card-title">ðŸ’¡ Insight Principal</div>
-              <p>El 42% de las cancelaciones provenÃ­an de confusiones en el flujo de pagos. Producto priorizÃ³ la pasarela de cobros a raÃ­z de este hallazgo.</p>
+              <div class="info-card-title">💡 Insight Principal</div>
+              <p>El 42% de las cancelaciones provenían de confusiones en el flujo de pagos. Producto priorizó la pasarela de cobros a raíz de este hallazgo.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: PROSPECCIÃ“N B2B EN N8N -->
-      <section class="slide" data-slide="10" data-notes="En el frente de adquisiciÃ³n B2B, diseÃ±amos un flujo de prospecciÃ³n autÃ³noma en n8n. El sistema formula bÃºsquedas avanzadas en Google, extrae el contenido de pÃ¡ginas web comerciales, lo convierte a Markdown y utiliza un agente de IA para extraer datos de contacto y redactar propuestas comerciales hiper-personalizadas de manera continua.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ OrquestaciÃ³n Comercial</div>
-        <h2 class="slide-title">ProspecciÃ³n B2B Automatizada en n8n</h2>
+      <!-- SLIDE 10: PROSPECCIÓN B2B EN N8N -->
+      <section class="slide" data-slide="10" data-notes="En el frente de adquisición B2B, diseñamos un flujo de prospección autónoma en n8n. El sistema formula búsquedas avanzadas en Google, extrae el contenido de páginas web comerciales, lo convierte a Markdown y utiliza un agente de IA para extraer datos de contacto y redactar propuestas comerciales hiper-personalizadas de manera continua.">
+        <div class="slide-tag">Capítulo 4 • Orquestación Comercial</div>
+        <h2 class="slide-title">Prospección B2B Automatizada en n8n</h2>
 
         <div class="slide-body">
           <div class="slide-col slide-col-wide">
             <div class="image-container">
               <img src="Capitulo_4/imagenes/workflow_n8n.png" alt="Workflow n8n" />
-              <div class="image-caption">Workflow autÃ³nomo en n8n para bÃºsqueda, extracciÃ³n web y redacciÃ³n de correos</div>
+              <div class="image-caption">Workflow autónomo en n8n para búsqueda, extracción web y redacción de correos</div>
             </div>
           </div>
 
           <div class="slide-col" style="flex: 0.9;">
             <div class="info-card">
-              <div class="info-card-title">ðŸ¤– Agente Extractor + LLM</div>
-              <p>FormulaciÃ³n de bÃºsquedas dinÃ¡micas en Google API $\rightarrow$ ConversiÃ³n a Markdown $\rightarrow$ ExtracciÃ³n de emails/telÃ©fonos $\rightarrow$ RedacciÃ³n personalizada.</p>
+              <div class="info-card-title">🤖 Agente Extractor + LLM</div>
+              <p>Formulación de búsquedas dinámicas en Google API &rarr; Conversión a Markdown &rarr; Extracción de emails/teléfonos &rarr; Redacción personalizada.</p>
             </div>
             <div class="info-card" style="border-left: 4px solid var(--gold-accent);">
-              <div class="info-card-title">ðŸŽ¯ Beneficio Comercial</div>
-              <p>Elimina la bÃºsqueda manual de prospectos, permitiendo que los asesores se concentren Ãºnicamente en llamadas de cierre.</p>
+              <div class="info-card-title">🎯 Beneficio Comercial</div>
+              <p>Elimina la búsqueda manual de prospectos, permitiendo que los asesores se concentren únicamente en llamadas de cierre.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 11: INGENIERÃA COMO MARKETING -->
-      <section class="slide" data-slide="11" data-notes="Aplicando el concepto de IngenierÃ­a como Marketing, construimos un micrositio satÃ©lite de herramientas tributarias y de nÃ³mina gratuitas desplegado en Vercel Edge. Este portal generÃ³ atracciÃ³n orgÃ¡nica continua sin inversiÃ³n en pauta digital. Entre febrero y junio captÃ³ 4.500 visitas, resultando en 70 nuevas suscripciones de pago e ingresos por mÃ¡s de 20 millones de pesos colombianos.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ AdquisiciÃ³n OrgÃ¡nica</div>
-        <h2 class="slide-title">Ecosistema SatÃ©lite ("IngenierÃ­a como Marketing")</h2>
+      <!-- SLIDE 11: INGENIERÍA COMO MARKETING -->
+      <section class="slide" data-slide="11" data-notes="Aplicando el concepto de Ingeniería como Marketing, construimos un micrositio satélite de herramientas tributarias y de nómina gratuitas desplegado en Vercel Edge. Este portal generó atracción orgánica continua sin inversión en pauta digital. Entre febrero y junio captó 4.500 visitas, resultando en 70 nuevas suscripciones de pago e ingresos por más de 20 millones de pesos colombianos.">
+        <div class="slide-tag">Capítulo 4 • Adquisición Orgánica</div>
+        <h2 class="slide-title">Ecosistema Satélite ("Ingeniería como Marketing")</h2>
 
         <div class="slide-body">
           <div class="slide-col slide-col-wide">
             <div class="image-container">
               <img src="Capitulo_4/imagenes/herramientas_organico.png" alt="Herramientas Gratuitas Vercel" />
-              <div class="image-caption">Portal satÃ©lite de herramientas gratuitas (Calculadoras de NÃ³mina y PDF)</div>
+              <div class="image-caption">Portal satélite de herramientas gratuitas (Calculadoras de Nómina y PDF)</div>
             </div>
           </div>
 
@@ -1041,7 +1186,7 @@
             <div class="metric-grid" style="grid-template-columns: 1fr;">
               <div class="metric-box">
                 <div class="metric-value">4.500</div>
-                <div class="metric-label">Visitas Ãºnicas orgÃ¡nicas (Feb - Jun)</div>
+                <div class="metric-label">Visitas únicas orgánicas (Feb - Jun)</div>
               </div>
               <div class="metric-box">
                 <div class="metric-value">70</div>
@@ -1049,57 +1194,57 @@
               </div>
               <div class="metric-box" style="border-color: var(--gold-accent);">
                 <div class="metric-value">+$20M COP</div>
-                <div class="metric-label">Ingresos directos sin inversiÃ³n en pauta</div>
+                <div class="metric-label">Ingresos directos sin inversión en pauta</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 12: RETENCIÃ“N Y COHORTES -->
-      <section class="slide" data-slide="12" data-notes="En el mÃ³dulo de retenciÃ³n, programamos en Google Colab un anÃ¡lisis de cohortes que revelÃ³ que los clientes con un solo mÃ³dulo activo tenÃ­an el mayor riesgo de abandono en su primera renovaciÃ³n. Ejecutamos un experimento sobre 144 usuarios enviando notificaciones automatizadas por WhatsApp para promover la activaciÃ³n de mÃ³dulos. El resultado fue un incremento en la retenciÃ³n inicial del 40% histÃ³rico al 42.98%.">
-        <div class="slide-tag">CapÃ­tulo 4 â€¢ Modelado de RetenciÃ³n</div>
+      <!-- SLIDE 12: RETENCIÓN Y COHORTES -->
+      <section class="slide" data-slide="12" data-notes="En el módulo de retención, programamos en Google Colab un análisis de cohortes que reveló que los clientes con un solo módulo activo tenían el mayor riesgo de abandono en su primera renovación. Ejecutamos un experimento sobre 144 usuarios enviando notificaciones automatizadas por WhatsApp para promover la activación de módulos. El resultado fue un incremento en la retención inicial del 40% histórico al 42.98%.">
+        <div class="slide-tag">Capítulo 4 • Modelado de Retención</div>
         <h2 class="slide-title">Modelo de Cohortes y Experimento de Crecimiento</h2>
 
         <div class="slide-body">
           <div class="slide-col slide-col-wide">
             <div class="image-container">
               <img src="Capitulo_4/imagenes/cohortes_retencion.png" alt="Cohortes Colab Python" />
-              <div class="image-caption">AnÃ¡lisis de cohortes de decaimiento y resultados del experimento en Google Colab</div>
+              <div class="image-caption">Análisis de cohortes de decaimiento y resultados del experimento en Google Colab</div>
             </div>
           </div>
 
           <div class="slide-col" style="flex: 0.9;">
             <div class="info-card">
-              <div class="info-card-title">ðŸ§ª DiseÃ±o Experimento</div>
-              <p>PoblaciÃ³n: 144 usuarios en riesgo (1 solo mÃ³dulo activo en mes 0). IntervenciÃ³n: Notificaciones automatizadas por WhatsApp/Email.</p>
+              <div class="info-card-title">🧪 Diseño Experimento</div>
+              <p>Población: 144 usuarios en riesgo (1 solo módulo activo en mes 0). Intervención: Notificaciones automatizadas por WhatsApp/Email.</p>
             </div>
             <div class="metric-box" style="border-color: var(--univalle-red-light);">
               <div class="metric-value">42,98%</div>
-              <div class="metric-label">Tasa de retenciÃ³n lograda (vs 40% histÃ³rico)</div>
+              <div class="metric-label">Tasa de retención lograda (vs 40% histórico)</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 13: VALIDACIÃ“N CON USUARIOS Y QA -->
-      <section class="slide" data-slide="13" data-notes="Para asegurar que las herramientas respondieran a las necesidades reales del negocio, realizamos un proceso de validaciÃ³n continua en las reuniones diarias con el Director de Growth (CGO), la Business Analyst y la Coordinadora de Marketing. AdemÃ¡s, ejecutamos una matriz de 7 casos de prueba (QA) en producciÃ³n, confirmando una coincidencia del 100% (0% de error) en los reportes automÃ¡ticos frente a las entregas manuales previas.">
-        <div class="slide-tag">CapÃ­tulo 5 â€¢ ValidaciÃ³n y Control de Calidad</div>
-        <h2 class="slide-title">ValidaciÃ³n con Usuarios y Matriz QA</h2>
+      <!-- SLIDE 13: VALIDACIÓN CON USUARIOS Y QA -->
+      <section class="slide" data-slide="13" data-notes="Para asegurar que las herramientas respondieran a las necesidades reales del negocio, realizamos un proceso de validación continua en las reuniones diarias con el Director de Growth (CGO), la Business Analyst y la Coordinadora de Marketing. Además, ejecutamos una matriz de 7 casos de prueba (QA) en producción, confirmando una coincidencia del 100% (0% de error) en los reportes automáticos frente a las entregas manuales previas.">
+        <div class="slide-tag">Capítulo 5 • Validación y Control de Calidad</div>
+        <h2 class="slide-title">Validación con Usuarios y Matriz QA</h2>
 
         <div class="slide-body">
           <div class="slide-col">
             <div class="info-card" style="border-left: 4px solid var(--univalle-red);">
-              <div class="info-card-title">ðŸ‘¥ Participantes de ValidaciÃ³n (3)</div>
+              <div class="info-card-title">👥 Participantes de Validación (3)</div>
               <ul>
-                <li><strong>Director de Growth (CGO):</strong> Decisiones estratÃ©gicas.</li>
-                <li><strong>Business Analyst:</strong> Reglas de negocio y lÃ³gica SQL.</li>
-                <li><strong>Coordinadora de Marketing:</strong> CaptaciÃ³n y campaÃ±as.</li>
+                <li><strong>Director de Growth (CGO):</strong> Decisiones estratégicas.</li>
+                <li><strong>Business Analyst:</strong> Reglas de negocio y lógica SQL.</li>
+                <li><strong>Coordinadora de Marketing:</strong> Captación y campañas.</li>
               </ul>
             </div>
             <div class="info-card">
-              <div class="info-card-title">ðŸ”„ DinÃ¡mica Iterativa (Daily Meetings)</div>
-              <p>PresentaciÃ³n de entregables $\rightarrow$ Pruebas en columna <em>En RevisiÃ³n</em> (1h a varios dÃ­as) $\rightarrow$ AprobaciÃ³n registrada en Kanban (*Done*).</p>
+              <div class="info-card-title">🔄 Dinámica Iterativa (Daily Meetings)</div>
+              <p>Presentación de entregables &rarr; Pruebas en columna <em>En Revisión</em> (1h a varios días) &rarr; Aprobación registrada en Kanban (*Done*).</p>
             </div>
           </div>
 
@@ -1115,7 +1260,7 @@
               <tbody>
                 <tr>
                   <td><strong>TC-01</strong></td>
-                  <td>AuditorÃ­a Flujo de Caja vs Manual</td>
+                  <td>Auditoría Flujo de Caja vs Manual</td>
                   <td><span style="color:#10B981; font-weight:700;">100% Coincidencia (0% Error)</span></td>
                 </tr>
                 <tr>
@@ -1125,12 +1270,12 @@
                 </tr>
                 <tr>
                   <td><strong>TC-03</strong></td>
-                  <td>ClasificaciÃ³n NLP (13k chats)</td>
-                  <td><span style="color:#10B981; font-weight:700;">98% PrecisiÃ³n en muestra</span></td>
+                  <td>Clasificación NLP (13k chats)</td>
+                  <td><span style="color:#10B981; font-weight:700;">98% Precisión en muestra</span></td>
                 </tr>
                 <tr>
                   <td><strong>TC-05</strong></td>
-                  <td>Experimento Cohortes RetenciÃ³n</td>
+                  <td>Experimento Cohortes Retención</td>
                   <td><span style="color:#10B981; font-weight:700;">Incremento al 42.98%</span></td>
                 </tr>
               </tbody>
@@ -1140,60 +1285,60 @@
       </section>
 
       <!-- SLIDE 14: CONCLUSIONES E IMPACTO -->
-      <section class="slide" data-slide="14" data-notes="En conclusiÃ³n, el proyecto logrÃ³ transformar la gestiÃ³n de Growth en Dataico. Operativamente, redujo tiempos de reporte de horas a segundos. Financieramente, generÃ³ ingresos directos, mejorÃ³ la retenciÃ³n y aportÃ³ previsibilidad en el recaudo. Y tÃ©cnicamente, demostrÃ³ que la combinaciÃ³n de arquitecturas modulares, automatizaciÃ³n ETL e IA aporta un valor estratÃ©gico tangible.">
-        <div class="slide-tag">CapÃ­tulo 6 â€¢ Conclusiones</div>
+      <section class="slide" data-slide="14" data-notes="En conclusión, el proyecto logró transformar la gestión de Growth en Dataico. Operativamente, redujo tiempos de reporte de horas a segundos. Financieramente, generó ingresos directos, mejoró la retención y aportó previsibilidad en el recaudo. Y técnicamente, demostró que la combinación de arquitecturas modulares, automatización ETL e IA aporta un valor estratégico tangible.">
+        <div class="slide-tag">Capítulo 6 • Conclusiones</div>
         <h2 class="slide-title">Conclusiones e Impacto en Dataico</h2>
 
         <div class="slide-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
           <div class="info-card" style="border-top: 4px solid var(--univalle-red);">
-            <div class="info-card-title">â±ï¸ 1. Impacto Operativo</div>
-            <p>ReducciÃ³n de tiempos de reporterÃ­a semanal de varias horas de tabulaciÃ³n manual a <strong>menos de 1 minuto</strong> en Metabase BI.</p>
+            <div class="info-card-title">⏱️ 1. Impacto Operativo</div>
+            <p>Reducción de tiempos de reportería semanal de varias horas de tabulación manual a <strong>menos de 1 minuto</strong> en Metabase BI.</p>
           </div>
           <div class="info-card" style="border-top: 4px solid var(--gold-accent);">
-            <div class="info-card-title">ðŸŽ¯ 2. Impacto EstratÃ©gico</div>
-            <p>EstandarizaciÃ³n de reglas de negocio en el Data Mart. TransiciÃ³n hacia una cultura organizacional <strong>Data-Driven</strong>.</p>
+            <div class="info-card-title">🎯 2. Impacto Estratégico</div>
+            <p>Estandarización de reglas de negocio en el Data Mart. Transición hacia una cultura organizacional <strong>Data-Driven</strong>.</p>
           </div>
           <div class="info-card" style="border-top: 4px solid #10B981;">
-            <div class="info-card-title">ðŸ’° 3. Impacto Financiero</div>
-            <p>ProyecciÃ³n de recaudo de MRR con &lt;5% de error y captaciÃ³n orgÃ¡nica de <strong>+$20M COP</strong> mediante herramientas gratuitas.</p>
+            <div class="info-card-title">💰 3. Impacto Financiero</div>
+            <p>Proyección de recaudo de MRR con &lt;5% de error y captación orgánica de <strong>+$20M COP</strong> mediante herramientas gratuitas.</p>
           </div>
           <div class="info-card" style="border-top: 4px solid #3B82F6;">
-            <div class="info-card-title">ðŸ’¡ 4. InnovaciÃ³n TÃ©cnica</div>
-            <p>IntegraciÃ³n de modelos LLM (OpenAI) para convertir datos cualitativos no estructurados (13k chats) en mÃ©tricas cuantitativas.</p>
+            <div class="info-card-title">💡 4. Innovación Técnica</div>
+            <p>Integración de modelos LLM (OpenAI) para convertir datos cualitativos no estructurados (13k chats) en métricas cuantitativas.</p>
           </div>
         </div>
       </section>
 
       <!-- SLIDE 15: TRABAJOS FUTUROS Y CIERRE -->
-      <section class="slide" data-slide="15" data-notes="Como trabajos futuros, se propone entrenar modelos predictivos de Machine Learning sobre el Data Mart estructurado para anticipar la cancelaciÃ³n de clientes, asÃ­ como implementar recomendaciones in-app. Agradezco enormemente a mi tutor, al equipo de Dataico y a los evaluadores por su atenciÃ³n. Quedo a su disposiciÃ³n para resolver sus inquietudes.">
-        <div class="slide-tag">CapÃ­tulo 6 â€¢ Trabajos Futuros & Cierre</div>
-        <h2 class="slide-title">Trabajos Futuros y Cierre de la SustentaciÃ³n</h2>
+      <section class="slide" data-slide="15" data-notes="Como trabajos futuros, se propone entrenar modelos predictivos de Machine Learning sobre el Data Mart estructurado para anticipar la cancelación de clientes, así como implementar recomendaciones in-app. Agradezco enormemente a mi tutor, al equipo de Dataico y a los evaluadores por su atención. Quedo a su disposición para resolver sus inquietudes.">
+        <div class="slide-tag">Capítulo 6 • Trabajos Futuros & Cierre</div>
+        <h2 class="slide-title">Trabajos Futuros y Cierre de la Sustentación</h2>
 
         <div class="slide-body">
           <div class="slide-col">
             <div class="info-card">
-              <div class="info-card-title">ðŸ”® 1. Modelos Predictivos de Churn</div>
-              <p>Entrenar clasificadores (Random Forest / XGBoost) sobre el Data Mart para predecir la cancelaciÃ³n antes de que ocurra.</p>
+              <div class="info-card-title">🔮 1. Modelos Predictivos de Churn</div>
+              <p>Entrenar clasificadores (Random Forest / XGBoost) sobre el Data Mart para predecir la cancelación antes de que ocurra.</p>
             </div>
             <div class="info-card">
-              <div class="info-card-title">ðŸ’¡ 2. Recomendador In-App</div>
-              <p>Sugerir la activaciÃ³n de mÃ³dulos en tiempo real dentro de la plataforma segÃºn el comportamiento de la cohorte del usuario.</p>
+              <div class="info-card-title">💡 2. Recomendador In-App</div>
+              <p>Sugerir la activación de módulos en tiempo real dentro de la plataforma según el comportamiento de la cohorte del usuario.</p>
             </div>
             <div class="info-card">
-              <div class="info-card-title">â˜ï¸ 3. MigraciÃ³n a Data Warehouse (OLAP)</div>
-              <p>Evolucionar la base analÃ­tica a BigQuery o Snowflake utilizando dbt (data build tool).</p>
+              <div class="info-card-title">☁️ 3. Migración a Data Warehouse (OLAP)</div>
+              <p>Evolucionar la base analítica a BigQuery o Snowflake utilizando dbt (data build tool).</p>
             </div>
           </div>
 
           <div class="slide-col" style="justify-content: center;">
             <div class="metric-box" style="padding: 32px; background: linear-gradient(135deg, var(--univalle-red-dark), rgba(15, 23, 42, 0.9));">
-              <div style="font-size: 2.8rem; margin-bottom: 12px;">ðŸŽ“</div>
-              <div class="metric-value" style="font-size: 1.9rem;">Â¡Muchas Gracias!</div>
+              <div style="font-size: 2.8rem; margin-bottom: 12px;">🎓</div>
+              <div class="metric-value" style="font-size: 1.9rem;">¡Muchas Gracias!</div>
               <p style="color: var(--gold-accent); font-weight: 700; margin-top: 6px;">
                 Espacio Abierto para Preguntas del Jurado
               </p>
               <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 12px;">
-                VÃ­ctor Manuel Alzate Morales â€¢ Universidad del Valle
+                Víctor Manuel Alzate Morales • Universidad del Valle
               </p>
             </div>
           </div>
@@ -1216,10 +1361,10 @@
 
       <div class="nav-controls">
         <button class="nav-btn" id="btn-prev" onclick="prevSlide()">
-          â† Anterior
+          �  Anterior
         </button>
         <button class="nav-btn" id="btn-next" onclick="nextSlide()">
-          Siguiente â†’
+          Siguiente →
         </button>
       </div>
     </footer>
@@ -1230,9 +1375,9 @@
   <div id="notes-drawer">
     <div class="notes-header">
       <div class="notes-title">
-        ðŸ“ Guion del Orador (Diapositiva <span id="notes-slide-num">1</span>)
+        �  Guion del Orador (Diapositiva <span id="notes-slide-num">1</span>)
       </div>
-      <button class="icon-btn" onclick="toggleNotes()" style="padding: 4px 8px; font-size: 0.75rem;">âœ• Cerrar</button>
+      <button class="icon-btn" onclick="toggleNotes()" style="padding: 4px 8px; font-size: 0.75rem;">✕ Cerrar</button>
     </div>
     <div class="notes-content" id="notes-text">
       Cargando notas...
@@ -1242,12 +1387,27 @@
   <!-- OVERVIEW MATRIX MODAL -->
   <div id="overview-modal">
     <div class="overview-header">
-      <h2 style="font-family:'Outfit',sans-serif; color:#FFF; font-size:1.5rem;">ðŸŽ›ï¸ Vista General de Diapositivas</h2>
-      <button class="icon-btn" onclick="toggleOverview()">âœ• Cerrar (Esc)</button>
+      <h2 style="font-family:'Outfit',sans-serif; color:#FFF; font-size:1.5rem;">&#x1F39B;&#xFE0F; Vista General de Diapositivas</h2>
+      <button class="icon-btn" onclick="toggleOverview()">&#x2715; Cerrar (Esc)</button>
     </div>
     <div class="overview-grid" id="overview-grid-container">
       <!-- Grid items injected by JS -->
     </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+    <div id="lightbox-controls">
+      <button class="lb-btn" id="lb-zoom-out" title="Reducir zoom">&#x1F50D; &minus;</button>
+      <span id="lb-zoom-level">100%</span>
+      <button class="lb-btn" id="lb-zoom-in" title="Aumentar zoom">&#x1F50D; +</button>
+      <button class="lb-btn" id="lb-reset" title="Restablecer vista">&#x21BA; Reset</button>
+      <button class="lb-btn" id="lb-close" title="Cerrar (Esc)">&#x2715; Cerrar</button>
+    </div>
+    <div id="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="Imagen ampliada" draggable="false" />
+    </div>
+    <div id="lightbox-caption"></div>
   </div>
 
   <!-- JAVASCRIPT LOGIC -->
@@ -1441,6 +1601,173 @@
 
     // Initialize presentation
     updateSlide();
+
+    // ==========================================================
+    //  LIGHTBOX CON ZOOM E IMAGEN ARRASTRABLE
+    // ==========================================================
+    (function() {
+      const overlay    = document.getElementById('lightbox-overlay');
+      const lbImg      = document.getElementById('lightbox-img');
+      const lbCaption  = document.getElementById('lightbox-caption');
+      const lbZoomLvl  = document.getElementById('lb-zoom-level');
+      const btnZoomIn  = document.getElementById('lb-zoom-in');
+      const btnZoomOut = document.getElementById('lb-zoom-out');
+      const btnReset   = document.getElementById('lb-reset');
+      const btnClose   = document.getElementById('lb-close');
+      const imgWrap    = document.getElementById('lightbox-img-wrap');
+
+      let scale = 1;
+      let translateX = 0;
+      let translateY = 0;
+      let isDragging = false;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let lastTransX = 0;
+      let lastTransY = 0;
+
+      const MIN_SCALE = 0.5;
+      const MAX_SCALE = 5;
+      const ZOOM_STEP = 0.25;
+
+      // --- A�adir zoom-hint y click listener a cada imagen de diapositiva ---
+      document.querySelectorAll('.image-container').forEach(container => {
+        const img = container.querySelector('img');
+        if (!img) return;
+
+        // A�adir hint visual
+        const hint = document.createElement('div');
+        hint.className = 'image-zoom-hint';
+        hint.innerHTML = '&#x1F50D; Click para ampliar';
+        container.appendChild(hint);
+
+        // Abrir lightbox al hacer click
+        img.addEventListener('click', () => {
+          const caption = container.querySelector('.image-caption');
+          openLightbox(img.src, caption ? caption.textContent.trim() : '');
+        });
+      });
+
+      function openLightbox(src, captionText) {
+        lbImg.src = src;
+        lbCaption.textContent = captionText;
+        resetTransform();
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { lbImg.src = ''; }, 300);
+      }
+
+      function resetTransform() {
+        scale = 1;
+        translateX = 0;
+        translateY = 0;
+        applyTransform(true);
+      }
+
+      function applyTransform(animated) {
+        lbImg.style.transition = animated ? 'transform 0.2s ease' : 'none';
+        lbImg.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+        lbZoomLvl.textContent = Math.round(scale * 100) + '%';
+      }
+
+      function clampTranslate() {
+        // Restrict pan so image doesn't wander too far off-screen
+        const maxPan = Math.max(0, (scale - 1) * imgWrap.clientWidth / 2);
+        const maxPanY = Math.max(0, (scale - 1) * imgWrap.clientHeight / 2);
+        translateX = Math.min(maxPan, Math.max(-maxPan, translateX));
+        translateY = Math.min(maxPanY, Math.max(-maxPanY, translateY));
+      }
+
+      // Botones
+      btnClose.addEventListener('click', closeLightbox);
+      btnZoomIn.addEventListener('click', () => {
+        scale = Math.min(MAX_SCALE, scale + ZOOM_STEP);
+        clampTranslate();
+        applyTransform(true);
+      });
+      btnZoomOut.addEventListener('click', () => {
+        scale = Math.max(MIN_SCALE, scale - ZOOM_STEP);
+        clampTranslate();
+        applyTransform(true);
+      });
+      btnReset.addEventListener('click', resetTransform);
+
+      // Cerrar al hacer click fuera de la imagen
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay || e.target === imgWrap) closeLightbox();
+      });
+
+      // Zoom con rueda del mouse
+      imgWrap.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+        scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale + delta));
+        clampTranslate();
+        applyTransform(false);
+      }, { passive: false });
+
+      // Doble click para zoom r�pido
+      lbImg.addEventListener('dblclick', () => {
+        if (scale > 1) {
+          resetTransform();
+        } else {
+          scale = 2;
+          applyTransform(true);
+        }
+      });
+
+      // Arrastrar imagen (drag to pan)
+      lbImg.addEventListener('mousedown', (e) => {
+        if (scale <= 1) return;
+        isDragging = true;
+        lbImg.classList.add('dragging');
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        lastTransX = translateX;
+        lastTransY = translateY;
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = (e.clientX - dragStartX) / scale;
+        const dy = (e.clientY - dragStartY) / scale;
+        translateX = lastTransX + dx;
+        translateY = lastTransY + dy;
+        clampTranslate();
+        applyTransform(false);
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          lbImg.classList.remove('dragging');
+        }
+      });
+
+      // Teclado: cerrar con Escape, zoom con + / -
+      document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape') { closeLightbox(); e.stopPropagation(); }
+        if (e.key === '+' || e.key === '=') {
+          scale = Math.min(MAX_SCALE, scale + ZOOM_STEP);
+          clampTranslate();
+          applyTransform(true);
+          e.preventDefault();
+        }
+        if (e.key === '-') {
+          scale = Math.max(MIN_SCALE, scale - ZOOM_STEP);
+          clampTranslate();
+          applyTransform(true);
+          e.preventDefault();
+        }
+        if (e.key === '0') { resetTransform(); e.preventDefault(); }
+      }, true);
+    })();
   </script>
 </body>
 </html>
