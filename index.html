@@ -2,8 +2,36 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#090D16">
   <title>Sustentación Trabajo de Grado | Víctor Manuel Alzate Morales - Univalle</title>
+
+  <!-- Icono de la pestaña -->
+  <link rel="icon" type="image/png" href="univalle.png">
+  <link rel="apple-touch-icon" href="univalle.png">
+
+  <!-- Metadatos para buscadores y para compartir el enlace -->
+  <meta name="description" content="Sistema analítico para el monitoreo y optimización de las estrategias de crecimiento de clientes del área de Growth en Dataico. Trabajo de grado, Universidad del Valle.">
+  <meta name="author" content="Víctor Manuel Alzate Morales">
+  <link rel="canonical" href="https://incognyto10.github.io/Presentacion-Trabajo-de-Grado/">
+
+  <!-- Open Graph (WhatsApp, LinkedIn, Facebook, Slack) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Universidad del Valle - Sede Tulúa">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://incognyto10.github.io/Presentacion-Trabajo-de-Grado/">
+  <meta property="og:title" content="Sustentación de Trabajo de Grado | Víctor Manuel Alzate Morales">
+  <meta property="og:description" content="Implementación de un sistema analítico para el área de Growth en Dataico: Data Mart en PostgreSQL, pipelines ETL, dashboards BI y análisis de churn con IA. Ingeniería de Sistemas, Universidad del Valle.">
+  <meta property="og:image" content="https://incognyto10.github.io/Presentacion-Trabajo-de-Grado/univalle.png">
+  <meta property="og:image:width" content="764">
+  <meta property="og:image:height" content="764">
+  <meta property="og:image:alt" content="Escudo de la Universidad del Valle">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sustentación de Trabajo de Grado | Víctor Manuel Alzate Morales">
+  <meta name="twitter:description" content="Sistema analítico para el monitoreo y optimización de estrategias de crecimiento de clientes en Dataico. Universidad del Valle, Sede Tulúa.">
+  <meta name="twitter:image" content="https://incognyto10.github.io/Presentacion-Trabajo-de-Grado/univalle.png">
   
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,9 +79,11 @@
     }
 
     html, body {
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
+      -webkit-text-size-adjust: 100%;
+      overscroll-behavior: none;
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-main);
@@ -137,8 +167,9 @@
     #presentation-app {
       display: flex;
       flex-direction: column;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
+      height: 100dvh;
       position: relative;
       z-index: 1;
     }
@@ -795,6 +826,477 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    /* =========================================================
+       SISTEMA DE ANIMACIONES DE TARJETAS
+       Las animaciones de entrada estan acotadas a .slide.active,
+       de modo que se reproducen cada vez que se llega a la
+       diapositiva y no consumen CPU en las diapositivas ocultas.
+       ========================================================= */
+
+    @keyframes cardFlipIn {
+      from { opacity: 0; transform: perspective(900px) rotateY(-70deg) scale(0.94); }
+      60%  { opacity: 1; }
+      to   { opacity: 1; transform: perspective(900px) rotateY(0deg) scale(1); }
+    }
+
+    @keyframes cardInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes cardPop {
+      0%   { opacity: 0; transform: scale(0.8); }
+      65%  { opacity: 1; transform: scale(1.045); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-9px); }
+    }
+
+    @keyframes glowPulseRed {
+      0%, 100% {
+        border-color: var(--border-highlight);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 rgba(200, 16, 46, 0);
+      }
+      50% {
+        border-color: var(--univalle-red-light);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 26px 2px rgba(200, 16, 46, 0.55);
+      }
+    }
+
+    @keyframes glowPulseGold {
+      0%, 100% {
+        border-color: var(--border-color);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 rgba(212, 175, 55, 0);
+      }
+      50% {
+        border-color: var(--gold-accent);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 24px 2px rgba(212, 175, 55, 0.5);
+      }
+    }
+
+    /* El barrido se mueve dentro del propio degradado del pseudo-elemento,
+       asi no se sale de la tarjeta y no hace falta recortarla. */
+    @keyframes shimmerSweep {
+      0%        { background-position: 190% 0; opacity: 0; }
+      14%, 42%  { opacity: 1; }
+      58%, 100% { background-position: -90% 0; opacity: 0; }
+    }
+
+    @keyframes iconSpin      { to { transform: rotate(360deg); } }
+    @keyframes iconSway      { 0%, 100% { transform: translateY(0) rotate(-7deg); } 50% { transform: translateY(-7px) rotate(7deg); } }
+    @keyframes iconBlink     { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px var(--gold-glow)); } 50% { opacity: 0.45; filter: none; } }
+
+    /* --- Entradas escalonadas: giro en 3D --- */
+    .slide.active .anim-flip { animation: cardFlipIn 0.62s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+    .slide.active .anim-flip:nth-child(2) { animation-delay: 0.13s; }
+    .slide.active .anim-flip:nth-child(3) { animation-delay: 0.26s; }
+    .slide.active .anim-flip:nth-child(4) { animation-delay: 0.39s; }
+
+    /* --- Entradas escalonadas: deslizamiento lateral --- */
+    .slide.active .anim-in-left { animation: cardInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+    .slide.active .anim-in-left:nth-child(2) { animation-delay: 0.11s; }
+    .slide.active .anim-in-left:nth-child(3) { animation-delay: 0.22s; }
+    .slide.active .anim-in-left:nth-child(4) { animation-delay: 0.33s; }
+
+    /* --- Entradas escalonadas: aparicion con rebote (cifras clave) --- */
+    .slide.active .anim-pop { animation: cardPop 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) backwards; }
+    .slide.active .anim-pop:nth-child(2) { animation-delay: 0.12s; }
+    .slide.active .anim-pop:nth-child(3) { animation-delay: 0.24s; }
+
+    /* --- Flotacion continua (tarjeta protagonista de la diapositiva) --- */
+    .slide.active .anim-float {
+      animation: cardPop 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) both,
+                 cardFloat 5.5s ease-in-out 0.6s infinite;
+    }
+
+    /* --- Halo pulsante --- */
+    .slide.active .anim-glow:not(.anim-float)      { animation: glowPulseRed 3.6s ease-in-out 0.4s infinite; }
+    .slide.active .anim-glow-gold:not(.anim-float) { animation: glowPulseGold 3.8s ease-in-out 0.4s infinite; }
+
+    /* Cuando una tarjeta flota y brilla a la vez, el halo va en el pseudo-elemento
+       para no pisar la animacion de transform. */
+    .anim-float.anim-glow-gold,
+    .anim-float.anim-glow { position: relative; }
+    .anim-float.anim-glow::after,
+    .anim-float.anim-glow-gold::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      pointer-events: none;
+      border: 1px solid transparent;
+    }
+    .slide.active .anim-float.anim-glow::after      { animation: glowPulseRed 3.6s ease-in-out 0.6s infinite; }
+    .slide.active .anim-float.anim-glow-gold::after { animation: glowPulseGold 3.8s ease-in-out 0.6s infinite; }
+
+    /* --- Barrido de luz que cruza la tarjeta --- */
+    .anim-shimmer { position: relative; }
+    .anim-shimmer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(100deg, transparent 34%, rgba(255, 255, 255, 0.14) 50%, transparent 66%);
+      background-size: 280% 100%;
+      background-position: 190% 0;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+    .slide.active .anim-shimmer::before { animation: shimmerSweep 5.2s ease-in-out 1.2s infinite; }
+
+    /* --- Realce al pasar el cursor / tocar --- */
+    .anim-lift {
+      transition: transform var(--transition-smooth),
+                  box-shadow var(--transition-smooth),
+                  border-color var(--transition-fast);
+      will-change: transform;
+    }
+    .anim-lift:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.7), 0 0 18px rgba(200, 16, 46, 0.3);
+      border-color: var(--univalle-red-light);
+    }
+
+    /* --- Iconos animados dentro de los titulos --- */
+    .i-spin,
+    .i-sway,
+    .i-blink {
+      display: inline-block;
+      transform-origin: center;
+    }
+    .slide.active .i-spin  { animation: iconSpin 6s linear infinite; }
+    .slide.active .i-sway  { animation: iconSway 3.4s ease-in-out infinite; }
+    .slide.active .i-blink { animation: iconBlink 2.4s ease-in-out infinite; }
+
+    /* En pantallas tactiles el realce se activa al tocar, no al pasar el cursor */
+    @media (hover: none) {
+      .anim-lift:hover { transform: none; box-shadow: none; }
+      .anim-lift:active {
+        transform: scale(0.985);
+        border-color: var(--univalle-red-light);
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE / ADAPTABILIDAD MULTIDISPOSITIVO
+       ========================================================= */
+
+    /* Scrollbars finos y discretos en todos los contenedores */
+    .slide, #notes-drawer, .overview-grid, .table-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+    }
+    .slide::-webkit-scrollbar,
+    #notes-drawer::-webkit-scrollbar,
+    .overview-grid::-webkit-scrollbar,
+    .table-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .slide::-webkit-scrollbar-thumb,
+    #notes-drawer::-webkit-scrollbar-thumb,
+    .overview-grid::-webkit-scrollbar-thumb,
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.22);
+      border-radius: 99px;
+    }
+
+    /* Contenedor con scroll horizontal para tablas anchas (inyectado por JS) */
+    .table-scroll {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+    }
+
+    /* Aviso de gesto para dispositivos tactiles */
+    #touch-hint {
+      position: fixed;
+      left: 50%;
+      bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid var(--gold-accent);
+      border-radius: 99px;
+      color: var(--text-main);
+      font-size: 0.78rem;
+      padding: 8px 16px;
+      z-index: 500;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      white-space: nowrap;
+    }
+    #touch-hint.show { opacity: 1; }
+
+    /* ---------------------------------------------------------
+       DISPOSITIVOS TACTILES: sin hover, objetivos mas grandes
+       --------------------------------------------------------- */
+    @media (hover: none) {
+      .image-zoom-hint { opacity: 1; }
+      .image-container img:hover { opacity: 1; }
+      .nav-btn:hover:not(:disabled) { transform: none; }
+      .overview-card:hover { transform: none; }
+      #lightbox-img { cursor: default; }
+      .slide-table tr:hover td { background: transparent; }
+    }
+
+    /* ---------------------------------------------------------
+       LAPTOPS PEQUENAS / TABLETS HORIZONTALES  (<= 1200px)
+       --------------------------------------------------------- */
+    @media (max-width: 1200px) {
+      #slide-viewport { padding: 16px 20px; }
+      .slide {
+        width: calc(100% - 40px);
+        height: calc(100% - 32px);
+        padding: 24px 28px;
+      }
+      .slide-title { font-size: 1.45rem; margin-bottom: 16px; }
+      .slide-body { gap: 20px; }
+      .slide-col { gap: 12px; }
+      .metric-value { font-size: 1.8rem; }
+      .project-header-title {
+        font-size: 0.82rem;
+        max-width: 30vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .icon-btn { padding: 7px 10px; font-size: 0.78rem; }
+      .icon-btn kbd { display: none; }
+    }
+
+    /* ---------------------------------------------------------
+       TABLETS VERTICALES  (<= 900px) : columnas apiladas
+       --------------------------------------------------------- */
+    @media (max-width: 900px) {
+      header {
+        height: auto;
+        min-height: 54px;
+        padding: 8px 14px;
+        gap: 10px;
+      }
+      .brand-group { gap: 10px; min-width: 0; }
+      .project-header-title { display: none; }
+      .header-actions { gap: 6px; flex-shrink: 0; }
+      .btn-label { display: none; }
+      .icon-btn {
+        padding: 9px 11px;
+        font-size: 1rem;
+        min-width: 42px;
+        justify-content: center;
+        gap: 0;
+      }
+
+      #slide-viewport { padding: 10px 12px; }
+      .slide {
+        width: calc(100% - 24px);
+        height: calc(100% - 20px);
+        max-width: none;
+        max-height: none;
+        padding: 18px 18px 22px;
+        border-radius: var(--radius-md);
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+        backdrop-filter: blur(6px);
+      }
+
+      /* Todo el contenido pasa a una sola columna vertical */
+      .slide-body {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        align-items: stretch !important;
+        gap: 14px;
+        flex: 1 1 auto;
+      }
+      .slide-col,
+      .slide-col-wide {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        flex: 0 0 auto !important;
+        gap: 12px;
+        min-height: 0;
+      }
+
+      /* Las imagenes ya no compiten por altura: se adaptan al ancho */
+      .image-container {
+        flex: 0 0 auto !important;
+        height: auto;
+        min-height: 0;
+      }
+      .image-container img {
+        flex: 0 0 auto;
+        height: auto;
+        max-height: 48vh;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+        gap: 12px;
+      }
+      .metric-box { padding: 14px !important; }
+      .metric-value { font-size: 1.7rem; }
+
+      /* Tablas con scroll horizontal propio */
+      .slide-table { font-size: 0.8rem; min-width: 520px; }
+      .slide-table th, .slide-table td { padding: 8px 10px; }
+
+      /* Notas del orador como hoja inferior */
+      #notes-drawer {
+        left: 10px;
+        right: 10px;
+        width: auto;
+        bottom: calc(62px + env(safe-area-inset-bottom, 0px));
+        max-height: 48vh;
+        padding: 16px;
+      }
+
+      #overview-modal { padding: 16px 14px calc(16px + env(safe-area-inset-bottom, 0px)); }
+      .overview-header { margin-bottom: 14px; }
+      .overview-header h2 { font-size: 1.1rem !important; }
+      .overview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+      }
+
+      .bg-glow-1, .bg-glow-2 { width: 80vw; height: 38vh; }
+    }
+
+    /* ---------------------------------------------------------
+       MOVILES  (<= 640px)
+       --------------------------------------------------------- */
+    @media (max-width: 640px) {
+      header { min-height: 50px; padding: 7px 10px; }
+      .univalle-badge { padding: 4px 9px; gap: 7px; }
+      .univalle-logo-img { height: 19px; }
+      .univalle-text { font-size: 0.7rem; letter-spacing: 0.3px; }
+      /* El puntero laser depende del mouse: no aplica en movil */
+      #btn-laser { display: none; }
+      .icon-btn { padding: 8px 10px; min-width: 40px; font-size: 0.95rem; }
+
+      #slide-viewport { padding: 8px 8px; }
+      .slide {
+        width: calc(100% - 16px);
+        height: calc(100% - 16px);
+        padding: 14px 14px 20px;
+      }
+
+      .slide-tag { font-size: 0.62rem; letter-spacing: 1px; margin-bottom: 4px; }
+      .slide-title {
+        font-size: 1.12rem;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        line-height: 1.28;
+      }
+
+      .info-card { padding: 12px 13px; }
+      .info-card-title { font-size: 0.9rem; margin-bottom: 6px; }
+      .info-card p, .info-card li { font-size: 0.82rem; line-height: 1.5; }
+      .info-card ul { padding-left: 16px; }
+
+      .metric-grid { grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)) !important; gap: 10px; }
+      .metric-value { font-size: 1.45rem; }
+      .metric-label { font-size: 0.68rem; }
+
+      .image-container img { max-height: 42vh; }
+      .image-caption { font-size: 0.71rem; padding: 5px 9px; }
+      .image-zoom-hint { font-size: 0.64rem; padding: 2px 6px; }
+
+      .slide-table { font-size: 0.76rem; min-width: 460px; }
+
+      footer {
+        height: auto;
+        min-height: 56px;
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+      }
+      .slide-counter { font-size: 0.85rem; }
+      .nav-controls { gap: 8px; }
+      .nav-btn { padding: 10px 14px; font-size: 0.82rem; }
+
+      /* Lightbox adaptado a pantalla vertical */
+      #lightbox-img-wrap {
+        width: 100vw;
+        height: 68vh;
+        border: none;
+        border-radius: 0;
+      }
+      #lightbox-controls {
+        top: auto;
+        left: 8px;
+        right: 8px;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .lb-btn { padding: 9px 12px; font-size: 0.8rem; }
+      #lb-zoom-level { min-width: 48px; padding: 9px 8px; font-size: 0.8rem; }
+      #lightbox-caption {
+        top: calc(10px + env(safe-area-inset-top, 0px));
+        bottom: auto;
+        white-space: normal;
+        text-align: center;
+        max-width: 92vw;
+        font-size: 0.74rem;
+        line-height: 1.35;
+      }
+    }
+
+    /* ---------------------------------------------------------
+       MOVILES ESTRECHOS  (<= 400px)
+       --------------------------------------------------------- */
+    @media (max-width: 400px) {
+      .univalle-text { display: none; }
+      .icon-btn { padding: 8px 9px; min-width: 36px; }
+      .metric-grid { grid-template-columns: 1fr !important; }
+      .slide-title { font-size: 1.02rem; }
+      .nav-btn .btn-label { display: none; }
+      .nav-btn { padding: 10px 16px; font-size: 1rem; }
+      .overview-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); }
+    }
+
+    /* ---------------------------------------------------------
+       MOVIL EN HORIZONTAL: poca altura, se recuperan las columnas
+       --------------------------------------------------------- */
+    @media (max-width: 950px) and (max-height: 520px) and (orientation: landscape) {
+      header { min-height: 44px; padding: 5px 10px; }
+      footer { min-height: 44px; padding: 5px 10px calc(5px + env(safe-area-inset-bottom, 0px)); }
+      #slide-viewport { padding: 6px 8px; }
+      .slide {
+        width: calc(100% - 16px);
+        height: calc(100% - 12px);
+        padding: 12px 16px;
+      }
+      .slide-title { font-size: 0.98rem; margin-bottom: 8px; padding-bottom: 6px; }
+      .slide-tag { margin-bottom: 2px; }
+      .slide-body {
+        flex-direction: row !important;
+        gap: 12px;
+      }
+      .slide-col, .slide-col-wide { flex: 1 1 0 !important; }
+      .image-container { flex: 1 1 auto !important; min-height: 120px; }
+      .image-container img { max-height: 100%; height: 100%; }
+      .metric-value { font-size: 1.3rem; }
+      #lightbox-img-wrap { height: 78vh; }
+      #touch-hint { bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+    }
+
+    /* Respeta la preferencia de movimiento reducido */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -828,16 +1330,16 @@
 
       <div class="header-actions">
         <button class="icon-btn" id="btn-laser" onclick="toggleLaser()" title="Activar Puntero Láser (Tecla L)">
-          🔴 Puntero Láser <kbd style="font-size:0.7rem; opacity:0.7;">(L)</kbd>
+          <span class="btn-icon">🔴</span><span class="btn-label">Puntero Láser <kbd style="font-size:0.7rem; opacity:0.7;">(L)</kbd></span>
         </button>
         <button class="icon-btn" id="btn-notes" onclick="toggleNotes()" title="Ver Notas del Orador (Tecla N)">
-          📝 Notas <kbd style="font-size:0.7rem; opacity:0.7;">(N)</kbd>
+          <span class="btn-icon">📝</span><span class="btn-label">Notas <kbd style="font-size:0.7rem; opacity:0.7;">(N)</kbd></span>
         </button>
         <button class="icon-btn" onclick="toggleOverview()" title="Vista General de Diapositivas (Tecla O)">
-          🎛️ Vista General <kbd style="font-size:0.7rem; opacity:0.7;">(O)</kbd>
+          <span class="btn-icon">🎛️</span><span class="btn-label">Vista General <kbd style="font-size:0.7rem; opacity:0.7;">(O)</kbd></span>
         </button>
         <button class="icon-btn" onclick="toggleFullscreen()" title="Pantalla Completa (Tecla F)">
-          ⛶ Pantalla Completa
+          <span class="btn-icon">⛶</span><span class="btn-label">Pantalla Completa</span>
         </button>
       </div>
     </header>
@@ -862,12 +1364,12 @@
             </div>
 
             <div class="metric-grid">
-              <div class="info-card">
+              <div class="info-card anim-flip anim-lift">
                 <div class="info-card-title">👨‍💻 Autor</div>
                 <p style="color: #FFF; font-weight: 700;">Víctor Manuel Alzate Morales</p>
                 <p style="font-size: 0.82rem;">Código: 2313022</p>
               </div>
-              <div class="info-card">
+              <div class="info-card anim-flip anim-lift">
                 <div class="info-card-title">👨‍🏫 Director de Tesis</div>
                 <p style="color: #FFF; font-weight: 700;">Mauricio López Benítez</p>
                 <p style="font-size: 0.82rem;">Profesor Univalle</p>
@@ -876,8 +1378,8 @@
           </div>
 
           <div class="slide-col" style="flex: 0.8;">
-            <div class="metric-box" style="padding: 28px;">
-              <div style="font-size: 3rem; margin-bottom: 8px;">🚀</div>
+            <div class="metric-box anim-float anim-glow" style="padding: 28px;">
+              <div style="font-size: 3rem; margin-bottom: 8px;"><span class="i-sway">🚀</span></div>
               <div class="metric-value">Dataico</div>
               <div class="metric-label">Empresa SaaS de Facturación Electrónica</div>
               <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 10px;">
@@ -895,15 +1397,15 @@
 
         <div class="slide-body">
           <div class="slide-col">
-            <div class="info-card" style="border-left: 4px solid #EF4444;">
+            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid #EF4444;">
               <div class="info-card-title" style="color: #EF4444;">❌ 1. Dispersión de Fuentes de Datos</div>
               <p>Información aislada en PostgreSQL (base transaccional), HubSpot (CRM y soporte) y Google Analytics. Falta de una fuente única de verdad.</p>
             </div>
-            <div class="info-card" style="border-left: 4px solid #F59E0B;">
+            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid #F59E0B;">
               <div class="info-card-title" style="color: #F59E0B;">⚠️ 2. Reportería Manual Repetitiva</div>
               <p>Varias horas semanales dedicadas a consolidar hojas de cálculo en Excel. Riesgo constante de error humano y discrepancias en métricas financieras.</p>
             </div>
-            <div class="info-card" style="border-left: 4px solid #3B82F6;">
+            <div class="info-card anim-in-left anim-lift" style="border-left: 4px solid #3B82F6;">
               <div class="info-card-title" style="color: #60A5FA;">📉 3. Toma de Decisiones Reactiva</div>
               <p>Volatilidad no registrada en el recaudo diario (MRR) y falta de análisis cualitativo estructurado sobre las causas reales del abandono de clientes (Churn).</p>
             </div>
@@ -1008,19 +1510,19 @@
 
         <div class="slide-body">
           <div class="slide-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-            <div class="info-card">
+            <div class="info-card anim-flip anim-lift">
               <div class="info-card-title">🗄️ 1. Capa de Base de Datos</div>
               <p><strong>PostgreSQL:</strong> Fuente central de verdad. Aloja el Data Mart y las tablas dimensionales en estrella.</p>
             </div>
-            <div class="info-card">
+            <div class="info-card anim-flip anim-lift">
               <div class="info-card-title">⚡ 2. Capa de Orquestación</div>
               <p><strong>GitHub Actions + Python:</strong> Captura diaria de MRR a las 00:00.<br><strong>n8n:</strong> Workflows autónomos de prospección B2B.</p>
             </div>
-            <div class="info-card">
+            <div class="info-card anim-flip anim-lift">
               <div class="info-card-title">📈 3. Visualización e IA</div>
               <p><strong>Metabase BI:</strong> Dashboards de presupuesto y caja.<br><strong>OpenAI Agent (LLM):</strong> Clasificación de chats.<br><strong>Looker Studio:</strong> Reporte Churn.</p>
             </div>
-            <div class="info-card">
+            <div class="info-card anim-flip anim-lift">
               <div class="info-card-title">🌐 4. Adquisición Orgánica</div>
               <p><strong>Vercel Edge:</strong> Micrositio de herramientas gratuitas.<br><strong>Google Analytics:</strong> Atribución de eventos.</p>
             </div>
@@ -1035,8 +1537,8 @@
 
         <div class="slide-body">
           <div class="slide-col">
-            <div class="info-card" style="border-left: 4px solid var(--gold-accent);">
-              <div class="info-card-title">⭐ Tabla de Hechos Central</div>
+            <div class="info-card anim-glow-gold" style="border-left: 4px solid var(--gold-accent);">
+              <div class="info-card-title"><span class="i-spin">⭐</span> Tabla de Hechos Central</div>
               <p><strong>Fact_Transacciones / Fact_MRR:</strong> Registra movimientos financieros diarios, nuevos pagos, renovaciones, contracciones y cancelaciones.</p>
             </div>
             <div class="info-card">
@@ -1091,14 +1593,14 @@
         <div class="slide-body">
           <div class="slide-col" style="flex: 0.9;">
             <div class="info-card">
-              <div class="info-card-title">🔄 Orquestación Serverless</div>
+              <div class="info-card-title"><span class="i-spin">🔄</span> Orquestación Serverless</div>
               <p>Script Python ejecutado diariamente a las 00:00 mediante <strong>GitHub Actions</strong> con manejo seguro de secretos API.</p>
             </div>
             <div class="info-card">
               <div class="info-card-title">🛡️ Resiliencia y Reintentos</div>
               <p>Control de excepciones automatizado ante caídas temporales de red o latencia de servidores.</p>
             </div>
-            <div class="metric-box">
+            <div class="metric-box anim-pop">
               <div class="metric-value">&lt; 5% Error</div>
               <div class="metric-label">Margen de precisión en la proyección de cierre mensual de ingresos</div>
             </div>
@@ -1127,16 +1629,16 @@
           </div>
 
           <div class="slide-col" style="flex: 0.9;">
-            <div class="metric-box">
+            <div class="metric-box anim-pop">
               <div class="metric-value">+13.000</div>
               <div class="metric-label">Chats históricos de soporte procesados</div>
             </div>
-            <div class="metric-box" style="margin-top: 10px;">
+            <div class="metric-box anim-pop" style="margin-top: 10px;">
               <div class="metric-value">98%</div>
               <div class="metric-label">Precisión validada en muestra aleatoria de control</div>
             </div>
-            <div class="info-card" style="margin-top: 10px;">
-              <div class="info-card-title">💡 Insight Principal</div>
+            <div class="info-card anim-glow-gold anim-shimmer" style="margin-top: 10px;">
+              <div class="info-card-title"><span class="i-blink">💡</span> Insight Principal</div>
               <p>El 42% de las cancelaciones provenían de confusiones en el flujo de pagos. Producto priorizó la pasarela de cobros a raíz de este hallazgo.</p>
             </div>
           </div>
@@ -1184,15 +1686,15 @@
 
           <div class="slide-col" style="flex: 0.9;">
             <div class="metric-grid" style="grid-template-columns: 1fr;">
-              <div class="metric-box">
+              <div class="metric-box anim-pop">
                 <div class="metric-value">4.500</div>
                 <div class="metric-label">Visitas únicas orgánicas (Feb - Jun)</div>
               </div>
-              <div class="metric-box">
+              <div class="metric-box anim-pop">
                 <div class="metric-value">70</div>
                 <div class="metric-label">Clientes convertidos a planes de pago</div>
               </div>
-              <div class="metric-box" style="border-color: var(--gold-accent);">
+              <div class="metric-box anim-pop anim-glow-gold" style="border-color: var(--gold-accent);">
                 <div class="metric-value">+$20M COP</div>
                 <div class="metric-label">Ingresos directos sin inversión en pauta</div>
               </div>
@@ -1219,7 +1721,7 @@
               <div class="info-card-title">🧪 Diseño Experimento</div>
               <p>Población: 144 usuarios en riesgo (1 solo módulo activo en mes 0). Intervención: Notificaciones automatizadas por WhatsApp/Email.</p>
             </div>
-            <div class="metric-box" style="border-color: var(--univalle-red-light);">
+            <div class="metric-box anim-pop anim-glow" style="border-color: var(--univalle-red-light);">
               <div class="metric-value">42,98%</div>
               <div class="metric-label">Tasa de retención lograda (vs 40% histórico)</div>
             </div>
@@ -1290,19 +1792,19 @@
         <h2 class="slide-title">Conclusiones e Impacto en Dataico</h2>
 
         <div class="slide-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div class="info-card" style="border-top: 4px solid var(--univalle-red);">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid var(--univalle-red);">
             <div class="info-card-title">⏱️ 1. Impacto Operativo</div>
             <p>Reducción de tiempos de reportería semanal de varias horas de tabulación manual a <strong>menos de 1 minuto</strong> en Metabase BI.</p>
           </div>
-          <div class="info-card" style="border-top: 4px solid var(--gold-accent);">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid var(--gold-accent);">
             <div class="info-card-title">🎯 2. Impacto Estratégico</div>
             <p>Estandarización de reglas de negocio en el Data Mart. Transición hacia una cultura organizacional <strong>Data-Driven</strong>.</p>
           </div>
-          <div class="info-card" style="border-top: 4px solid #10B981;">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid #10B981;">
             <div class="info-card-title">💰 3. Impacto Financiero</div>
             <p>Proyección de recaudo de MRR con &lt;5% de error y captación orgánica de <strong>+$20M COP</strong> mediante herramientas gratuitas.</p>
           </div>
-          <div class="info-card" style="border-top: 4px solid #3B82F6;">
+          <div class="info-card anim-flip anim-lift" style="border-top: 4px solid #3B82F6;">
             <div class="info-card-title">💡 4. Innovación Técnica</div>
             <p>Integración de modelos LLM (OpenAI) para convertir datos cualitativos no estructurados (13k chats) en métricas cuantitativas.</p>
           </div>
@@ -1331,8 +1833,8 @@
           </div>
 
           <div class="slide-col" style="justify-content: center;">
-            <div class="metric-box" style="padding: 32px; background: linear-gradient(135deg, var(--univalle-red-dark), rgba(15, 23, 42, 0.9));">
-              <div style="font-size: 2.8rem; margin-bottom: 12px;">🎓</div>
+            <div class="metric-box anim-float anim-glow-gold" style="padding: 32px; background: linear-gradient(135deg, var(--univalle-red-dark), rgba(15, 23, 42, 0.9));">
+              <div style="font-size: 2.8rem; margin-bottom: 12px;"><span class="i-sway">🎓</span></div>
               <div class="metric-value" style="font-size: 1.9rem;">¡Muchas Gracias!</div>
               <p style="color: var(--gold-accent); font-weight: 700; margin-top: 6px;">
                 Espacio Abierto para Preguntas del Jurado
@@ -1361,10 +1863,10 @@
 
       <div class="nav-controls">
         <button class="nav-btn" id="btn-prev" onclick="prevSlide()">
-          �  Anterior
+          <span class="btn-icon">←</span><span class="btn-label">Anterior</span>
         </button>
         <button class="nav-btn" id="btn-next" onclick="nextSlide()">
-          Siguiente →
+          <span class="btn-label">Siguiente</span><span class="btn-icon">→</span>
         </button>
       </div>
     </footer>
@@ -1375,7 +1877,7 @@
   <div id="notes-drawer">
     <div class="notes-header">
       <div class="notes-title">
-        �  Guion del Orador (Diapositiva <span id="notes-slide-num">1</span>)
+        📝 Guion del Orador (Diapositiva <span id="notes-slide-num">1</span>)
       </div>
       <button class="icon-btn" onclick="toggleNotes()" style="padding: 4px 8px; font-size: 0.75rem;">✕ Cerrar</button>
     </div>
@@ -1629,12 +2131,12 @@
       const MAX_SCALE = 5;
       const ZOOM_STEP = 0.25;
 
-      // --- A�adir zoom-hint y click listener a cada imagen de diapositiva ---
+      // --- Añadir zoom-hint y click listener a cada imagen de diapositiva ---
       document.querySelectorAll('.image-container').forEach(container => {
         const img = container.querySelector('img');
         if (!img) return;
 
-        // A�adir hint visual
+        // Añadir hint visual
         const hint = document.createElement('div');
         hint.className = 'image-zoom-hint';
         hint.innerHTML = '&#x1F50D; Click para ampliar';
@@ -1710,7 +2212,7 @@
         applyTransform(false);
       }, { passive: false });
 
-      // Doble click para zoom r�pido
+      // Doble click para zoom rápido
       lbImg.addEventListener('dblclick', () => {
         if (scale > 1) {
           resetTransform();
@@ -1767,6 +2269,145 @@
         }
         if (e.key === '0') { resetTransform(); e.preventDefault(); }
       }, true);
+    })();
+    // ==========================================================
+    //  SOPORTE TACTIL / MOVIL
+    // ==========================================================
+    (function() {
+      const isTouch = window.matchMedia('(hover: none)').matches ||
+                      ('ontouchstart' in window) ||
+                      navigator.maxTouchPoints > 0;
+
+      // --- 1. Envolver las tablas anchas para que tengan scroll horizontal propio ---
+      document.querySelectorAll('.slide-table').forEach(table => {
+        if (table.parentElement && table.parentElement.classList.contains('table-scroll')) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'table-scroll';
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+      });
+
+      // --- 2. Navegacion por deslizamiento horizontal entre diapositivas ---
+      const viewport = document.getElementById('slide-viewport');
+      const overlay  = document.getElementById('lightbox-overlay');
+      let swipeX = 0, swipeY = 0, swipeTime = 0, swipeValid = false;
+
+      const SWIPE_MIN_DIST = 55;   // px recorridos minimos
+      const SWIPE_MAX_TIME = 800;  // ms para considerarlo gesto y no arrastre lento
+      const SWIPE_RATIO    = 1.6;  // debe ser claramente mas horizontal que vertical
+
+      viewport.addEventListener('touchstart', (e) => {
+        // Ignorar multitouch, modales abiertos y zonas con scroll horizontal propio
+        if (e.touches.length !== 1) { swipeValid = false; return; }
+        if (overlay.classList.contains('open')) { swipeValid = false; return; }
+        if (e.target.closest('.table-scroll') || e.target.closest('img')) { swipeValid = false; return; }
+        swipeValid = true;
+        swipeX = e.touches[0].clientX;
+        swipeY = e.touches[0].clientY;
+        swipeTime = e.timeStamp;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        if (!swipeValid || !e.changedTouches.length) return;
+        swipeValid = false;
+        const dx = e.changedTouches[0].clientX - swipeX;
+        const dy = e.changedTouches[0].clientY - swipeY;
+        if (e.timeStamp - swipeTime > SWIPE_MAX_TIME) return;
+        if (Math.abs(dx) < SWIPE_MIN_DIST) return;
+        if (Math.abs(dx) < Math.abs(dy) * SWIPE_RATIO) return;
+        if (dx < 0) { nextSlide(); } else { prevSlide(); }
+      }, { passive: true });
+
+      // --- 3. Aviso unico de gesto la primera vez en tactil ---
+      if (isTouch) {
+        const hint = document.createElement('div');
+        hint.id = 'touch-hint';
+        hint.textContent = 'Desliza a los lados para cambiar de diapositiva';
+        document.body.appendChild(hint);
+        setTimeout(() => hint.classList.add('show'), 700);
+        setTimeout(() => hint.classList.remove('show'), 4600);
+        setTimeout(() => hint.remove(), 5400);
+      }
+
+      // --- 4. Lightbox: pinza para zoom, arrastre con un dedo y doble toque ---
+      const lbImg   = document.getElementById('lightbox-img');
+      const imgWrap = document.getElementById('lightbox-img-wrap');
+      if (!lbImg || !imgWrap) return;
+
+      // Se reutiliza el transform que ya aplica el lightbox leyendo su estado del DOM
+      function readState() {
+        const m = /scale\(([-\d.]+)\)\s*translate\(([-\d.]+)px,\s*([-\d.]+)px\)/.exec(lbImg.style.transform || '');
+        return m
+          ? { scale: parseFloat(m[1]), x: parseFloat(m[2]), y: parseFloat(m[3]) }
+          : { scale: 1, x: 0, y: 0 };
+      }
+
+      function writeState(s) {
+        const scale = Math.min(5, Math.max(0.5, s.scale));
+        const maxX = Math.max(0, (scale - 1) * imgWrap.clientWidth / 2);
+        const maxY = Math.max(0, (scale - 1) * imgWrap.clientHeight / 2);
+        const x = Math.min(maxX, Math.max(-maxX, s.x));
+        const y = Math.min(maxY, Math.max(-maxY, s.y));
+        lbImg.style.transition = 'none';
+        lbImg.style.transform = `scale(${scale}) translate(${x}px, ${y}px)`;
+        const lvl = document.getElementById('lb-zoom-level');
+        if (lvl) lvl.textContent = Math.round(scale * 100) + '%';
+      }
+
+      let pinchDist = 0, pinchScale = 1;
+      let panStartX = 0, panStartY = 0, panBaseX = 0, panBaseY = 0, panning = false;
+      let lastTap = 0;
+
+      function distance(t1, t2) {
+        return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      }
+
+      imgWrap.addEventListener('touchstart', (e) => {
+        const st = readState();
+        if (e.touches.length === 2) {
+          panning = false;
+          pinchDist = distance(e.touches[0], e.touches[1]);
+          pinchScale = st.scale;
+          e.preventDefault();
+        } else if (e.touches.length === 1) {
+          // Doble toque = alternar zoom
+          const now = e.timeStamp;
+          if (now - lastTap < 300) {
+            writeState(st.scale > 1 ? { scale: 1, x: 0, y: 0 } : { scale: 2, x: 0, y: 0 });
+            lastTap = 0;
+            e.preventDefault();
+            return;
+          }
+          lastTap = now;
+
+          if (st.scale > 1) {
+            panning = true;
+            panStartX = e.touches[0].clientX;
+            panStartY = e.touches[0].clientY;
+            panBaseX = st.x;
+            panBaseY = st.y;
+          }
+        }
+      }, { passive: false });
+
+      imgWrap.addEventListener('touchmove', (e) => {
+        const st = readState();
+        if (e.touches.length === 2 && pinchDist > 0) {
+          const ratio = distance(e.touches[0], e.touches[1]) / pinchDist;
+          writeState({ scale: pinchScale * ratio, x: st.x, y: st.y });
+          e.preventDefault();
+        } else if (panning && e.touches.length === 1) {
+          const dx = (e.touches[0].clientX - panStartX) / st.scale;
+          const dy = (e.touches[0].clientY - panStartY) / st.scale;
+          writeState({ scale: st.scale, x: panBaseX + dx, y: panBaseY + dy });
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      imgWrap.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) pinchDist = 0;
+        if (e.touches.length === 0) panning = false;
+      }, { passive: true });
     })();
   </script>
 </body>
